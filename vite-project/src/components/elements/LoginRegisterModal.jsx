@@ -36,9 +36,9 @@ export const LoginRegisterModal = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            {/* 增大弹窗尺寸，使用 p-12 增加内边距 */}
-            <div className={`bg-box-bg p-12 rounded-lg border-4 relative w-96 ${theme === 'dark' ? 'border-box-border' : 'border-gradient-to-r from-blue-600 to-violet-600'}`}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-transparent">
+            {/* 修改这里的类名，无论白天还是黑暗模式都使用渐变边框 */}
+            <div className={`bg-box-bg p-12 rounded-lg border-4 relative w-96 border-gradient-to-r from-blue-600 to-violet-600`}>
                 <button
                     className="absolute top-4 right-4 text-heading-2 cursor-pointer"
                     onClick={onClose}
