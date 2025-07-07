@@ -1,5 +1,6 @@
+/* src/index.css */
 /* @符号在 CSS 中用于标识特殊指令 */
-@import "tailwindcss" ;
+@import "tailwindcss";
 
 @theme {
   --color-bg: 255 255 255; /* background */
@@ -37,6 +38,9 @@ html.dark {
   }
   .text-heading-3 {
     color: rgb(var(--heading-3));
+  }
+  .border-gradient-to-r {
+    border-image: linear-gradient(to right, blue, purple) 1;
   }
 }
 
