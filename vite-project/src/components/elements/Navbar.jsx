@@ -10,16 +10,12 @@ const navItems = [
         text: "首页"
     },
     {
-        href: "#services",
-        text: "服务"
+        href: "#discovery",
+        text: "发现"
     },
     {
-        href: "#about-us",
-        text: "关于我们"
-    },
-    {
-        href: "#features",
-        text: "特色"
+        href: "#mine",
+        text: "我的"
     },
 ];
 
@@ -56,7 +52,7 @@ export const Navbar = () => {
                                      lg:pb-0 border-b border-box-border lg:border-0
                                      px-6 lg:px-0 "
                     >
-                        <BtnLink text="点击开始" href="#cta" className=""/>
+                        <BtnLink text="注册/登录" href="#cta" className=""/>
                     </div>
                 </div>
 

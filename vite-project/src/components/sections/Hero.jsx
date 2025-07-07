@@ -19,28 +19,14 @@ export const Hero = () => {
             <div className="relative flex flex-col items-center text-center lg:text-left lg:py-8 lg:items-start
                             lg:max-w-none max-w-3xl mx-auto lg:mx-0 lg:flex-1 lg:w-1/2">
                 <h1 className="text-heading-1 text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold">
-                    Building the future of {" "}
+                    专属你的体育活动室：
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600 ml-2">
-                        Web3
+                        无界律动
                     </span>
                 </h1>
                 <Paragraph className="mt-8">
-                    We are a team of experienced developers and designers who are passionate about building the future of web3.
+                    在这里，摆脱一切束缚，遇见不平凡的自己
                 </Paragraph>
-                <div className={"mt-10 w-full flex max-w-md mx-auto lg:mx-0"}>
-                    <div className={"flex sm:flex-row flex-col gap-5 w-4"}>
-                        <form action={ "#" } className="py-1 pl-6 w-full pr-1 flex gap-3 items-center text-heading-3
-                                                        shadow-lg shadow-box-shadow border border-box-border
-                                                        bg-box-bg rounded-full ease-linear focus-within:bg-body
-                                                        focus-within:border-primary"
-                        >
-                            {/*<span className={"min-w-max pr-2 border-r border-box-border"}>*/}
-
-                            {/*</span>*/}
-                            {/*<input type="email" placeholder="Your email" className="rounded-lg px-4 py-2 bg-white"/>*/}
-                        </form>
-                    </div>
-                </div>
             </div>
         </Container>
     </section>
