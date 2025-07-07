@@ -25,7 +25,7 @@ export const Hero = () => {
                     </span>
                 </h1>
                 <Paragraph className="mt-8">
-                    在这里，摆脱一切束缚，遇见不平凡的自己
+                    在这里，摆脱一切束缚，遇见不平凡的自己。我们痴迷于运动所带来的快感，沉浸于运动所赋予生命的能量。
                 </Paragraph>
             </div>
         </Container>
