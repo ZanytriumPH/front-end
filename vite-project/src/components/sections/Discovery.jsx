@@ -4,14 +4,14 @@ import { Container } from '../shared/Container.jsx';
 import { ActivityCard } from '../cards/ActivityCard.jsx';
 import { BtnLink } from '../shared/BtnLink.jsx';
 
-// 模拟活动数据
-const activities = [
-    { title: '篮球比赛', time: '2024-10-01 14:00', location: '体育馆 1 号场地' },
-    { title: '足球友谊赛', time: '2024-10-02 15:30', location: '足球场' },
-    { title: '瑜伽课程', time: '2024-10-03 09:00', location: '健身中心' },
-    { title: '羽毛球活动', time: '2024-10-04 16:00', location: '羽毛球馆' },
-    { title: '乒乓球赛', time: '2024-10-05 18:00', location: '乒乓球室' },
-    { title: '跑步活动', time: '2024-10-06 07:00', location: '公园' },
+// 定义活动数据（移至组件外部确保全局可用）
+export const activities = [
+    { title: '篮球比赛', time: '2024-10-01 14:00', location: '体育馆 1 号场地', price: '¥50' },
+    { title: '足球友谊赛', time: '2024-10-02 15:30', location: '足球场', price: '¥60' },
+    { title: '瑜伽课程', time: '2024-10-03 09:00', location: '健身中心', price: '¥80' },
+    { title: '羽毛球活动', time: '2024-10-04 16:00', location: '羽毛球馆', price: '¥40' },
+    { title: '乒乓球赛', time: '2024-10-05 18:00', location: '乒乓球室', price: '¥30' },
+    { title: '跑步活动', time: '2024-10-06 07:00', location: '公园', price: '免费' },
 ];
 
 export const Discovery = () => {
@@ -28,7 +28,6 @@ export const Discovery = () => {
     return (
         <section id="discovery" className="py-20">
             <Container>
-                {/* 使用flex布局将标题和搜索组件放在同一行 */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
                     <h2 className="text-heading-1 text-3xl font-bold">探索精彩活动</h2>
                     <div className="flex gap-4 w-full md:w-auto">
@@ -58,6 +57,7 @@ export const Discovery = () => {
                                 title={activity.title}
                                 time={activity.time}
                                 location={activity.location}
+                                price={activity.price} // 确保传递price属性
                             />
                         ))}
                     </div>
