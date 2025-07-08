@@ -4,7 +4,7 @@ import { NavItem } from "../shared/NavItem.jsx";
 import { BtnLink } from "../shared/BtnLink.jsx";
 import { useThemeStore } from "../../store/ThemeStore.jsx";
 import { useState } from "react";
-import { LoginRegisterModal } from "./LoginRegisterModal.jsx";
+import { LoginRegisterCard } from "../cards/LoginRegisterCard.jsx";
 
 const navItems = [
     {
@@ -34,7 +34,7 @@ export const Navbar = () => {
     };
 
     return (
-        <header className="absolute inset-x-0 top-0 z-50 py-6">
+        <header className=" inset-x-0 top-0 z-50 py-6">
             <Container>
                 <nav className="w-full flex justify-between gap-6 relative">
                     {/* Logo */}
@@ -103,7 +103,7 @@ export const Navbar = () => {
                     </div>
                 </nav>
             </Container>
-            <LoginRegisterModal isOpen={isModalOpen} onClose={closeModal} />
+            <LoginRegisterCard isOpen={isModalOpen} onClose={closeModal} />
         </header>
     );
 };

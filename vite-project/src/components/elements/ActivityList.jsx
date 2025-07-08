@@ -1,8 +1,10 @@
-// src/components/sections/Discovery.jsx
+// todo 在Discovery点击“更多活动”跳转至这个页面，可以查看所有活动的ActivityCard
+// 也具有和Discovery中一样的搜索功能
+
+// src/components/elements/ActivityList.jsx
 import React, { useState } from 'react';
 import { Container } from '../shared/Container.jsx';
 import { ActivityCard } from '../cards/ActivityCard.jsx';
-import { BtnLink } from '../shared/BtnLink.jsx';
 
 // 模拟活动数据
 const activities = [
@@ -14,7 +16,7 @@ const activities = [
     { title: '跑步活动', time: '2024-10-06 07:00', location: '公园' },
 ];
 
-export const Discovery = () => {
+export const ActivityList = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState(activities);
 
@@ -26,33 +28,28 @@ export const Discovery = () => {
     };
 
     return (
-        <section id="discovery" className="py-20">
+        <section className="py-20">
             <Container>
-                {/* 使用flex布局将标题和搜索组件放在同一行 */}
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-                    <h2 className="text-heading-1 text-3xl font-bold">探索精彩活动</h2>
-                    <div className="flex gap-4 w-full md:w-auto">
-                        <input
-                            type="text"
-                            placeholder="搜索活动"
-                            className="flex-1 p-3 border border-box-border rounded-md bg-body text-heading-3"
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                        />
-                        <button
-                            className="px-6 py-3 rounded-full bg-violet-600 text-white hover:scale-102 cursor-pointer"
-                            onClick={handleSearch}
-                        >
-                            搜索
-                        </button>
-                    </div>
+                <div className="flex gap-4 mb-8">
+                    <input
+                        type="text"
+                        placeholder="搜索活动"
+                        className="flex-1 p-3 border border-box-border rounded-md bg-body text-heading-3"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                    <button
+                        className="px-6 py-3 rounded-full bg-violet-600 text-white hover:scale-102 cursor-pointer"
+                        onClick={handleSearch}
+                    >
+                        搜索
+                    </button>
                 </div>
-
                 {searchResults.length === 0 ? (
                     <p className="text-heading-3 text-center">暂无数据</p>
                 ) : (
-                    <div className="grid grid-cols-2 gap-6 md:grid-cols-3 mb-8">
-                        {searchResults.slice(0, 6).map((activity, index) => (
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                        {searchResults.map((activity, index) => (
                             <ActivityCard
                                 key={index}
                                 title={activity.title}
@@ -62,9 +59,6 @@ export const Discovery = () => {
                         ))}
                     </div>
                 )}
-                <div className="text-center">
-                    <BtnLink href="/activity-list" text="更多活动" />
-                </div>
             </Container>
         </section>
     );

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useThemeStore } from '../../store/ThemeStore.jsx';
 
-export const LoginRegisterModal = ({ isOpen, onClose }) => {
+export const LoginRegisterCard = ({ isOpen, onClose }) => {
     const { theme } = useThemeStore();
     const [isLogin, setIsLogin] = useState(true);
     const [password, setPassword] = useState('');
