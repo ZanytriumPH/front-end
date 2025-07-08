@@ -1,14 +1,19 @@
 // src/components/cards/ActivityCard.jsx
 import React from 'react';
 import { BtnLink } from '../shared/BtnLink.jsx';
+import { useNavigate } from 'react-router-dom';
 
-export const ActivityCard = ({ title, time, location, price = '¥0' }) => {
-    // 确保price有值，默认为¥0
+export const ActivityCard = ({ title, time, location, price = '¥0', id }) => {
+    const navigate = useNavigate();
     const displayPrice = price || '¥0';
+
+    const handleSignUp = (e) => {
+        e.preventDefault(); // 阻止默认行为
+        navigate(`/activity/${id}`);
+    };
 
     return (
         <div className="bg-box-bg p-6 rounded-lg border border-box-border relative">
-            {/* 右上角显示红色金额，移除背景色 */}
             <div className="absolute top-4 right-4 text-red-500 font-bold text-lg">
                 {displayPrice}
             </div>
@@ -19,7 +24,7 @@ export const ActivityCard = ({ title, time, location, price = '¥0' }) => {
             <p className="text-heading-3 mb-6">
                 <span className="font-medium">地点：</span>{location}
             </p>
-            <BtnLink href="#" text="去报名" />
+            <BtnLink href="#" text="去报名" onClick={handleSignUp} />
         </div>
     );
 };

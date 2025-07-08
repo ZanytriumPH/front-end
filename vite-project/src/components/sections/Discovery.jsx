@@ -6,12 +6,12 @@ import { BtnLink } from '../shared/BtnLink.jsx';
 
 // 定义活动数据（移至组件外部确保全局可用）
 export const activities = [
-    { title: '篮球比赛', time: '2024-10-01 14:00', location: '体育馆 1 号场地', price: '¥50' },
-    { title: '足球友谊赛', time: '2024-10-02 15:30', location: '足球场', price: '¥60' },
-    { title: '瑜伽课程', time: '2024-10-03 09:00', location: '健身中心', price: '¥80' },
-    { title: '羽毛球活动', time: '2024-10-04 16:00', location: '羽毛球馆', price: '¥40' },
-    { title: '乒乓球赛', time: '2024-10-05 18:00', location: '乒乓球室', price: '¥30' },
-    { title: '跑步活动', time: '2024-10-06 07:00', location: '公园', price: '免费' },
+    { id: 1, title: '篮球比赛', time: '2024-10-01 14:00', location: '体育馆 1 号场地', price: '¥50' },
+    { id: 2, title: '足球友谊赛', time: '2024-10-02 15:30', location: '足球场', price: '¥60' },
+    { id: 3, title: '瑜伽课程', time: '2024-10-03 09:00', location: '健身中心', price: '¥80' },
+    { id: 4, title: '羽毛球活动', time: '2024-10-04 16:00', location: '羽毛球馆', price: '¥40' },
+    { id: 5, title: '乒乓球赛', time: '2024-10-05 18:00', location: '乒乓球室', price: '¥30' },
+    { id: 6, title: '跑步活动', time: '2024-10-06 07:00', location: '公园', price: '免费' },
 ];
 
 export const Discovery = () => {
@@ -54,6 +54,7 @@ export const Discovery = () => {
                         {searchResults.slice(0, 6).map((activity, index) => (
                             <ActivityCard
                                 key={index}
+                                id={activity.id}
                                 title={activity.title}
                                 time={activity.time}
                                 location={activity.location}
