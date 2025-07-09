@@ -11,7 +11,8 @@ export const Layout = ({ title, children }) => {
     return (
         <>
             <Navbar />
-            <main className="flex flex-col gap-y-20 md:gap-y-32 overflow-y-auto">
+            {/* 缩短 gap-y 的值 */}
+            <main className="flex flex-col gap-y-10 md:gap-y-16 overflow-y-auto">
                 {children}
             </main>
             <Footer />
