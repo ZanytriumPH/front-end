@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Container } from '../shared/Container.jsx';
 import { ActivityCard } from '../cards/ActivityCard.jsx';
 import { BtnLink } from '../shared/BtnLink.jsx';
+import { ActivityList } from '../elements/ActivityList.jsx'; // 引入 ActivityList 组件
 
 // 定义活动数据（移至组件外部确保全局可用）
 export const activities = [
@@ -29,18 +30,68 @@ export const activities = [
         location: '羽毛球场',
         price: '¥30',
         image: 'https://example.com/badminton.jpg' // 替换为实际的图片 URL
-    }
+    },
+    {
+        id: 4,
+        title: '月抛球训练',
+        time: '2024-10-03 10:00',
+        location: '羽毛球场',
+        price: '免费',
+        image: 'https://example.com/badminton.jpg' // 替换为实际的图片 URL
+    },
+    {
+        id: 5,
+        title: '排球比赛',
+        time: '2024-10-04 16:00',
+        location: '排球场',
+        price: '¥80',
+        image: 'https://example.com/volleyball.jpg' // 替换为实际的图片 URL
+    },
+    {
+        id: 6,
+        title: '羽毛球训练',
+        time: '2024-10-04 16:00',
+        location: '羽毛球场',
+        price: '¥30',
+        image: 'https://example.com/badminton.jpg' // 替换为实际的图片 URL
+    },
+    {
+        id: 7,
+        title: '篮球比赛',
+        time: '2024-10-05 14:00',
+        location: '体育馆 1 号场地',
+        price: '¥50',
+        image: 'https://example.com/basketball.jpg' // 替换为实际的图片 URL
+    },
+    {
+        id: 8,
+        title: '羽毛球训练',
+        time: '2024-10-05 16:00',
+        location: '羽毛球场',
+        price: '¥30',
+        image: 'https://example.com/badminton.jpg' // 替换为实际的图片 URL
+    },
+
 ];
 
 export const Discovery = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState(activities);
+    const [isActivityListOpen, setIsActivityListOpen] = useState(false); // 新增状态
 
     const handleSearch = () => {
         const filteredResults = activities.filter(activity =>
             activity.title.toLowerCase().includes(searchQuery.toLowerCase())
         );
         setSearchResults(filteredResults);
+    };
+
+    const handleMoreActivities = () => {
+        setIsActivityListOpen(true); // 打开活动列表窗口
+    };
+
+    const handleCloseActivityList = () => {
+        setIsActivityListOpen(false); // 关闭活动列表窗口
     };
 
     return (
@@ -83,9 +134,34 @@ export const Discovery = () => {
                     </div>
                 )}
                 <div className="text-center">
-                    <BtnLink href="/activity-list" text="更多活动" />
+                    <BtnLink href="#" text="更多活动" onClick={handleMoreActivities} /> {/* 绑定点击事件 */}
                 </div>
             </Container>
+            {isActivityListOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-transparent">
+                    <div className="bg-box-bg p-12 rounded-lg border-4 relative w-11/12 max-w-3xl border-gradient-to-r from-blue-600 to-violet-600 max-h-[80vh] overflow-y-auto">
+                        <div className="absolute top-4 right-4 text-heading-2 cursor-pointer z-50">
+                            <button onClick={handleCloseActivityList}>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth="1.5"
+                                    stroke="currentColor"
+                                    className="w-6 h-6"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                        <ActivityList />
+                    </div>
+                </div>
+            )}
         </section>
     );
 };
