@@ -1,3 +1,4 @@
+// src/components/elements/Navbar.jsx
 import { Container } from "../shared/Container.jsx";
 import logo from "../../assets/logo.png";
 import { NavItem } from "../shared/NavItem.jsx";
@@ -34,7 +35,7 @@ export const Navbar = () => {
     };
 
     return (
-        <header className=" inset-x-0 top-0 z-50 py-6">
+        <header className="fixed inset-x-0 top-0 z-50 py-3 bg-body">
             <Container>
                 <nav className="w-full flex justify-between gap-6 relative">
                     {/* Logo */}
