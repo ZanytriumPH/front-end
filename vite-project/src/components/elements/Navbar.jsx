@@ -40,12 +40,13 @@ export const Navbar = () => {
                 <nav className="w-full flex justify-between gap-6 relative">
                     {/* Logo */}
                     <div className="min-w-max inline-flex relative">
-                        <a href="/front/react/public" className="relative flex items-center gap-3">
+                        {/* 将 <a> 标签替换为 <div> 标签 */}
+                        <div className="relative flex items-center gap-3">
                             <img src={logo} alt="logo" className="w-10 h-10" />
                             <div className="inline-flex text-lg font-semibold text-heading-1">
                                 无界律动
                             </div>
-                        </a>
+                        </div>
                     </div>
 
                     <div className="flex flex-col lg:flex-row w-full lg:justify-between lg:items-center absolute top-full left-0 lg:static lg:top-0 bg-body lg:bg-transparent border-x border-x-box-border lg:border-x-0 lg:h-auto h-0 overflow-hidden">
