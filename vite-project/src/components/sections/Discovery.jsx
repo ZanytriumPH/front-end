@@ -6,12 +6,30 @@ import { BtnLink } from '../shared/BtnLink.jsx';
 
 // 定义活动数据（移至组件外部确保全局可用）
 export const activities = [
-    { id: 1, title: '篮球比赛', time: '2024-10-01 14:00', location: '体育馆 1 号场地', price: '¥50' },
-    { id: 2, title: '足球友谊赛', time: '2024-10-02 15:30', location: '足球场', price: '¥60' },
-    { id: 3, title: '瑜伽课程', time: '2024-10-03 09:00', location: '健身中心', price: '¥80' },
-    { id: 4, title: '羽毛球活动', time: '2024-10-04 16:00', location: '羽毛球馆', price: '¥40' },
-    { id: 5, title: '乒乓球赛', time: '2024-10-05 18:00', location: '乒乓球室', price: '¥30' },
-    { id: 6, title: '跑步活动', time: '2024-10-06 07:00', location: '公园', price: '免费' },
+    {
+        id: 1,
+        title: '篮球比赛',
+        time: '2024-10-01 14:00',
+        location: '体育馆 1 号场地',
+        price: '¥50',
+        image: '../../public/vite.svg' // 替换为实际的图片 URL
+    },
+    {
+        id: 2,
+        title: '足球友谊赛',
+        time: '2024-10-02 15:30',
+        location: '足球场',
+        price: '¥60',
+        image: '../../src/assets/HeroImg.png' // 替换为实际的图片 URL
+    },
+    {
+        id: 3,
+        title: '羽毛球训练',
+        time: '2024-10-03 10:00',
+        location: '羽毛球场',
+        price: '¥30',
+        image: 'https://example.com/badminton.jpg' // 替换为实际的图片 URL
+    }
 ];
 
 export const Discovery = () => {
@@ -29,7 +47,7 @@ export const Discovery = () => {
         <section id="discovery" className="py-20">
             <Container>
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-                    <h2 className="text-heading-1 text-3xl font-bold">探索精彩活动</h2>
+                    <h2 className="text-heading-1 text-5xl font-bold">探索精彩活动</h2>
                     <div className="flex gap-4 w-full md:w-auto">
                         <input
                             type="text"
@@ -58,7 +76,8 @@ export const Discovery = () => {
                                 title={activity.title}
                                 time={activity.time}
                                 location={activity.location}
-                                price={activity.price} // 确保传递price属性
+                                price={activity.price}
+                                image={activity.image} // 传递图片 URL
                             />
                         ))}
                     </div>

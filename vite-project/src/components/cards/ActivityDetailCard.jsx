@@ -76,7 +76,7 @@ export const ActivityDetailCard = () => {
                 <p className="text-heading-3 mb-8">
                     详细描述：这是一个非常精彩的体育活动，欢迎大家踊跃参加！
                 </p>
-                <h3 className="text-heading-2 text-xl font-bold mb-4">他人评论</h3>
+                <h3 className="text-heading-2 text-xl font-bold mb-4">评论区</h3>
                 {comments.map(comment => (
                     <div
                         key={comment.id}
