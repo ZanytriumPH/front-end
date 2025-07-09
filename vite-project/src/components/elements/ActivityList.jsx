@@ -1,6 +1,5 @@
 // src/components/elements/ActivityList.jsx
 import React, { useState } from 'react';
-import { Container } from '../shared/Container.jsx';
 import { ActivityCard } from '../cards/ActivityCard.jsx';
 import { activities } from '../sections/Discovery.jsx'; // 导入活动数据
 
@@ -16,8 +15,8 @@ export const ActivityList = () => {
     };
 
     return (
-        <section className="py-20">
-            <Container>
+        <section className="py-24">
+            <div className="mx-auto max-w-screen-2xl w-full px-5 sm:px-8 md:px-14 lg:px-5">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
                     <h2 className="text-heading-1 text-3xl font-bold">全部活动</h2>
                     <div className="flex gap-4 w-full md:w-auto">
@@ -40,7 +39,7 @@ export const ActivityList = () => {
                 {searchResults.length === 0 ? (
                     <p className="text-heading-3 text-center">暂无数据</p>
                 ) : (
-                    <div className="grid grid-cols-2 gap-6"> {/* 修改为 grid-cols-2 */}
+                    <div className="grid grid-cols-4 gap-6">
                         {searchResults.map((activity, index) => (
                             <ActivityCard
                                 key={index}
@@ -50,11 +49,13 @@ export const ActivityList = () => {
                                 location={activity.location}
                                 price={activity.price}
                                 image={activity.image}
+                                signedUp={activity.signedUp}
+                                total={activity.total} // 传递活动总人数
                             />
                         ))}
                     </div>
                 )}
-            </Container>
+            </div>
         </section>
     );
 };

@@ -10,7 +10,7 @@ const initialComments = [
     { id: 2, user: '李四', content: '期待参加！' },
 ];
 
-export const ActivityDetailCard = ({ isOpen, onClose, id }) => {
+export const ActivityDetailCard = ({ isOpen, onClose, id, signedUp, total }) => {
     if (!isOpen) return null;
 
     const activity = activities.find(act => act.id === parseInt(id)); // 找到对应的活动信息
@@ -62,11 +62,14 @@ export const ActivityDetailCard = ({ isOpen, onClose, id }) => {
                 <p className="text-heading-3 mb-4">
                     <span className="font-medium">时间：</span>{activity?.time || '2024-10-01 14:00'}
                 </p>
-                <p className="text-heading-3 mb-6">
+                <p className="text-heading-3 mb-4">
                     <span className="font-medium">地点：</span>{activity?.location || '体育馆 1 号场地'}
                 </p>
-                <p className="text-heading-3 mb-6">
+                <p className="text-heading-3 mb-4">
                     <span className="font-medium">价格：</span>{activity?.price || '免费'}
+                </p>
+                <p className="text-heading-3 mb-6">
+                    <span className="font-medium">报名情况：</span>{signedUp || 0}/{total || 0}
                 </p>
                 <p className="text-heading-3 mb-8">
                     详细描述：这是一个非常精彩的体育活动，欢迎大家踊跃参加！

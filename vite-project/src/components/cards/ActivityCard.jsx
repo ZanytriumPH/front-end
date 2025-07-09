@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { BtnLink } from '../shared/BtnLink.jsx';
 import { ActivityDetailCard } from './ActivityDetailCard.jsx';
 
-export const ActivityCard = ({ title, time, location, price = '¥0', id, image }) => {
+export const ActivityCard = ({ title, time, location, price = '¥0', id, image, signedUp = 0, total = 0 }) => {
     const [isDetailOpen, setIsDetailOpen] = useState(false);
     const displayPrice = price || '¥0';
 
@@ -25,16 +25,28 @@ export const ActivityCard = ({ title, time, location, price = '¥0', id, image }
                     {displayPrice}
                 </div>
                 <h3 className="text-heading-2 text-xl font-bold mb-2">{title}</h3>
-                <p className="text-heading-3 mb-4">
+                <p className="text-heading-3 mb-2">
                     <span className="font-medium">时间：</span>{time}
                 </p>
-                <p className="text-heading-3 mb-6">
+                <p className="text-heading-3 mb-2">
                     <span className="font-medium">地点：</span>{location}
                 </p>
-                <BtnLink href="#" text="去报名" onClick={handleSignUp} />
+                {/* 将“报名情况”和“去报名”按钮放在同一行 */}
+                <div className="flex justify-between items-center text-heading-3">
+                    <p>
+                        <span className="font-medium">报名情况：</span>{signedUp}/{total}
+                    </p>
+                    <BtnLink href="#" text="去报名" onClick={handleSignUp} />
+                </div>
             </div>
             {isDetailOpen && (
-                <ActivityDetailCard isOpen={isDetailOpen} onClose={handleCloseDetail} id={id} />
+                <ActivityDetailCard
+                    isOpen={isDetailOpen}
+                    onClose={handleCloseDetail}
+                    id={id}
+                    signedUp={signedUp}
+                    total={total}
+                />
             )}
         </>
     );
