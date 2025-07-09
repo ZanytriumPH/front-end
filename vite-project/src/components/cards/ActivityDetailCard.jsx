@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { Container } from '../shared/Container.jsx';
 import { BtnLink } from '../shared/BtnLink.jsx';
-import { useNavigate, useParams } from 'react-router-dom';
 import { activities } from '../sections/Discovery.jsx'; // 导入活动数据
 
 // 模拟他人评论数据
@@ -11,9 +10,9 @@ const initialComments = [
     { id: 2, user: '李四', content: '期待参加！' },
 ];
 
-export const ActivityDetailCard = () => {
-    const navigate = useNavigate();
-    const { id } = useParams(); // 获取路由参数中的活动 ID
+export const ActivityDetailCard = ({ isOpen, onClose, id }) => {
+    if (!isOpen) return null;
+
     const activity = activities.find(act => act.id === parseInt(id)); // 找到对应的活动信息
     const [comments, setComments] = useState(initialComments);
     const [newComment, setNewComment] = useState('');
@@ -32,15 +31,11 @@ export const ActivityDetailCard = () => {
         setComments(updatedComments);
     };
 
-    const handleClose = () => {
-        navigate(-1); // 返回上一页
-    };
-
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-transparent">
             <div className="bg-box-bg p-12 rounded-lg border-4 relative w-11/12 max-w-3xl border-gradient-to-r from-blue-600 to-violet-600 max-h-[80vh] overflow-y-auto">
                 <div className="absolute top-4 right-4 text-heading-2 cursor-pointer z-50">
-                    <button onClick={handleClose}>
+                    <button onClick={onClose}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
