@@ -152,8 +152,11 @@ export const Discovery = () => {
             {isActivityListOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-transparent">
                     <div className="bg-box-bg p-12 rounded-lg border-4 relative w-11/12 max-w-11xl border-gradient-to-r from-blue-600 to-violet-600 max-h-[90vh] overflow-y-auto">
-                        <div className="absolute top-4 right-4 text-heading-2 cursor-pointer z-50">
-                            <button onClick={handleCloseActivityList}>
+                        <div className="absolute top-3 right-7 text-heading-2 cursor-pointer z-50">
+                            <button
+                                className={`cursor-pointer fixed `}
+                                onClick={handleCloseActivityList}
+                            >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"

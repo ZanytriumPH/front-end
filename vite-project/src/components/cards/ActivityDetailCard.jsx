@@ -34,8 +34,11 @@ export const ActivityDetailCard = ({ isOpen, onClose, id, signedUp, total }) => 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-transparent">
             <div className="bg-box-bg p-12 rounded-lg border-4 relative w-11/12 max-w-3xl border-gradient-to-r from-blue-600 to-violet-600 max-h-[80vh] overflow-y-auto">
-                <div className="absolute top-4 right-4 text-heading-2 cursor-pointer z-50">
-                    <button onClick={onClose}>
+                <div className="absolute top-3 right-7 text-heading-2 cursor-pointer z-50">
+                    <button
+                        className={`cursor-pointer fixed `}
+                        onClick={onClose}
+                    >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -85,7 +88,7 @@ export const ActivityDetailCard = ({ isOpen, onClose, id, signedUp, total }) => 
                         </p>
                         {comment.user === '用户' && (
                             <button
-                                className="absolute top-2 right-2 text-red-500"
+                                className="absolute top-2 right-2 text-white bg-red-500 hover:bg-red-600 px-2 py-1 rounded-md cursor-pointer"
                                 onClick={() => handleCommentDelete(comment.id)}
                             >
                                 删除
@@ -93,11 +96,11 @@ export const ActivityDetailCard = ({ isOpen, onClose, id, signedUp, total }) => 
                         )}
                     </div>
                 ))}
-                <form onSubmit={handleCommentSubmit} className="mb-8">
+                <form onSubmit={handleCommentSubmit} className="mb-8 flex gap-4">
                     <input
                         type="text"
                         placeholder="发表评论"
-                        className="block w-full p-3 mb-4 border border-box-border rounded-md bg-body text-heading-3"
+                        className="flex-1 p-3 border border-box-border rounded-md bg-body text-heading-3"
                         value={newComment}
                         onChange={(e) => setNewComment(e.target.value)}
                     />
@@ -108,7 +111,9 @@ export const ActivityDetailCard = ({ isOpen, onClose, id, signedUp, total }) => 
                         提交评论
                     </button>
                 </form>
-                <BtnLink href="#" text="活动报名" />
+                <div className="text-center">
+                    <BtnLink href="#" text="活动报名" />
+                </div>
             </div>
         </div>
     );
