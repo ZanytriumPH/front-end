@@ -1,25 +1,22 @@
-// src/components/cards/MyRegisteredCard.jsx
-import { BaseActivity } from '../shared/BaseActivity.jsx';
+// src/components/cards/MyRegisteredDetailCard.jsx
+import React from 'react';
+import { BaseActivityDetail } from '../shared/BaseActivityDetail.jsx';
 
-export const MyRegisteredCard = ({ title, time, location, price = '¥0', id, image, signedUp = 0, total = 0 }) => {
-    const handleCancelRegistration = (e) => {
-        e.preventDefault();
-        // 可以在这里添加取消报名逻辑
-    };
+const handleCancelRegistration = (e) => {
+    e.preventDefault();
+    // 可以在这里添加取消报名逻辑
+};
 
+export const MyRegisteredDetailCard = ({ isOpen, onClose, id, signedUp, total }) => {
     return (
-        <BaseActivity
-            title={title}
-            time={time}
-            location={location}
-            price={price}
+        <BaseActivityDetail
+            isOpen={isOpen}
+            onClose={onClose}
             id={id}
-            image={image}
             signedUp={signedUp}
             total={total}
-            buttonText="取消报名"
+            buttonText="确认取消报名"
             onButtonClick={handleCancelRegistration}
-            cardType="registered"
         />
     );
 };

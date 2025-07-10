@@ -15,7 +15,7 @@ export const ActivityDetailCard = ({ isOpen, onClose, id, signedUp, total }) => 
             id={id}
             signedUp={signedUp}
             total={total}
-            buttonText="活动报名"
+            buttonText="确认活动报名"
             onButtonClick={handleSignUp}
         />
     );
