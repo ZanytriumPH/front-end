@@ -19,6 +19,7 @@ export const MyRegisteredCard = ({ title, time, location, price = '¥0', id, ima
             total={total}
             buttonText="取消报名"
             onButtonClick={handleCancelRegistration}
+            cardType="registered"
         />
     );
 };

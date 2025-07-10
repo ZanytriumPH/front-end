@@ -1,9 +1,9 @@
-// src/components/cards/BaseActivityCard.jsx
+// src/components/cards/BaseActivity.jsx
 import React, { useState } from 'react';
 import { BtnLink } from './BtnLink.jsx';
 import { ActivityDetailCard } from '../cards/ActivityDetailCard.jsx';
 
-export const BaseActivityCard = ({
+export const BaseActivity = ({
                                      title,
                                      time,
                                      location,

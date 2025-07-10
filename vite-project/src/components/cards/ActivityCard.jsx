@@ -1,5 +1,5 @@
 // src/components/cards/ActivityCard.jsx
-import { BaseActivityCard } from '../shared/BaseActivityCard.jsx';
+import { BaseActivity } from '../shared/BaseActivity.jsx';
 
 export const ActivityCard = ({ title, time, location, price = '¥0', id, image, signedUp = 0, total = 0 }) => {
     const handleSignUp = (e) => {
@@ -8,7 +8,7 @@ export const ActivityCard = ({ title, time, location, price = '¥0', id, image, 
     };
 
     return (
-        <BaseActivityCard
+        <BaseActivity
             title={title}
             time={time}
             location={location}

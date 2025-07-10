@@ -19,6 +19,7 @@ export const MyPublishedCard = ({ title, time, location, price = '¥0', id, imag
             total={total}
             buttonText="取消活动"
             onButtonClick={handleCancelActivity}
+            cardType="published"
         />
     );
 };
