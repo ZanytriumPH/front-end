@@ -52,6 +52,13 @@ html.dark {
   .bg-price {
     background-color: rgb(var(--price-bg));
   }
+  /* 添加新的边框颜色类 */
+  .border-normal {
+    border-color: black;
+  }
+  html.dark .border-normal {
+    border-color: white;
+  }
 }
 
 html {
