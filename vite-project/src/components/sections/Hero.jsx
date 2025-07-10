@@ -1,3 +1,4 @@
+// src/components/sections/Hero.jsx
 import { Container } from "../shared/Container.jsx";
 import { Paragraph } from "../shared/Paragraph.jsx";
 import HeroImg from "../../assets/HeroImg.png";
@@ -23,7 +24,7 @@ export const Hero = () => {
                             alt="Hero Image"
                             width="2350"
                             height="2359"
-                            className="lg:w-full lg:h-full rounded-3xl object-cover"
+                            className="lg:w-full lg:h-full rounded-3xl object-cover max-w-full"
                         />
                     </div>
 
