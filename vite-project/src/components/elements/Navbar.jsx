@@ -49,23 +49,21 @@ export const Navbar = () => {
                         </div>
                     </div>
 
-                    <div className="flex flex-col lg:flex-row w-full lg:justify-between lg:items-center absolute top-full left-0 lg:static lg:top-0 bg-body lg:bg-transparent border-x border-x-box-border lg:border-x-0 lg:h-auto h-0 overflow-hidden">
-                        <ul className="border-t border-box-border lg:border-t-0 px-6 lg:px-0 pt-6 lg:pt-0 flex flex-col lg:flex-row gap-y-4 gap-x-3 text-lg text-heading-2 w-full lg:justify-center lg:items-center">
-                            {navItems.map((item, key) => (
-                                <NavItem href={item.href} text={item.text} key={key} />
-                            ))}
-                        </ul>
-                        <div className="lg:min-w-max flex items-center sm:w-max w-full pb-6 lg:pb-0 border-b border-box-border lg:border-0 px-6 lg:px-0">
-                            <BtnLink
-                                text="登录/注册"
-                                href="#"
-                                className=""
-                                onClick={openModal}
-                            />
-                        </div>
-                    </div>
+                    {/* 导航项 */}
+                    <ul className="hidden lg:flex gap-x-3 text-lg text-heading-2 items-center">
+                        {navItems.map((item, key) => (
+                            <NavItem href={item.href} text={item.text} key={key} />
+                        ))}
+                    </ul>
 
+                    {/* 登录/注册按钮和主题切换按钮 */}
                     <div className="min-w-max flex items-center gap-x-3">
+                        <BtnLink
+                            text="登录/注册"
+                            href="#"
+                            className=""
+                            onClick={openModal}
+                        />
                         <button
                             onClick={toggleTheme}
                             className="outline-hidden border-2 flex relative text-heading-2 rounded-full p-1 lg:p-1 border-box-border cursor-pointer"

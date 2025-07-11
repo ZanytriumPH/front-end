@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useThemeStore } from '../../store/ThemeStore.jsx';
+import axios from 'axios';
+
 
 export const LoginRegisterCard = ({ isOpen, onClose }) => {
     const { theme } = useThemeStore();
@@ -49,7 +51,7 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         let isValid = true;
 
@@ -72,12 +74,19 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
         }
 
         if (isValid) {
-            // 验证通过，执行登录/注册逻辑
-            console.log(`${isLogin ? '登录' : '注册'}成功：`, {
-                username: e.target[0].value,
-                password
-            });
-            onClose(); // 可选择提交后关闭弹窗
+            const username = e.target[0].value;
+            try {
+                if (isLogin) {
+                    const response = await axios.post('/api/login', { username, password });
+                    console.log('登录成功：', response.data);
+                } else {
+                    const response = await axios.post('/api/register', { username, password });
+                    console.log('注册成功：', response.data);
+                }
+                onClose(); // 可选择提交后关闭弹窗
+            } catch (error) {
+                console.error('请求失败：', error.response.data.message);
+            }
         }
     };
 
