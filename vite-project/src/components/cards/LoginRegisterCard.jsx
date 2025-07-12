@@ -80,32 +80,37 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
         if (isValid) {
             const username = e.target[0].value;
             try {
+                let response;
                 if (isLogin) {
-                    const response = await axios.post('/api/login', { username, password });
-                    console.log('登录成功：', response.data);
-                    // 显示登录成功通知
+                    response = await axios.post('/api/login', { username, password });
+                } else {
+                    response = await axios.post('/api/register', { username, password });
+                }
+
+                if (response.data.success) {
+                    console.log(`${isLogin ? '登录' : '注册'}成功：`, response.data);
+                    // 显示成功通知
                     setNotification({
-                        message: '登录成功',
+                        message: `${isLogin ? '登录' : '注册'}成功`,
                         visible: true,
                         type: 'success'
                     });
+                    // 提交成功后延迟关闭弹窗，让用户能看到通知
+                    setTimeout(onClose, 1500);
                 } else {
-                    const response = await axios.post('/api/register', { username, password });
-                    console.log('注册成功：', response.data);
-                    // 显示注册成功通知
+                    console.error(`${isLogin ? '登录' : '注册'}失败：`, response.data.message);
+                    // 显示错误通知
                     setNotification({
-                        message: '注册成功',
+                        message: response.data.message || '操作失败，请重试',
                         visible: true,
-                        type: 'success'
+                        type: 'error'
                     });
                 }
-                // 提交成功后延迟关闭弹窗，让用户能看到通知
-                setTimeout(onClose, 1500);
             } catch (error) {
-                console.error('请求失败：', error.response.data.message);
+                console.error('请求失败：', error.response ? error.response.data.message : '网络错误');
                 // 显示错误通知
                 setNotification({
-                    message: error.response.data.message || '操作失败，请重试',
+                    message: error.response ? error.response.data.message : '网络错误',
                     visible: true,
                     type: 'error'
                 });
