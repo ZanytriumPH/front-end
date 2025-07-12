@@ -26,11 +26,16 @@ export const Navbar = () => {
     const { toggleTheme, theme } = useThemeStore();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [username, setUsername] = useState('');
+    const [balance, setBalance] = useState(100);
 
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
+        const storedBalance = localStorage.getItem('balance');
         if (storedUsername) {
             setUsername(storedUsername);
+        }
+        if (storedBalance) {
+            setBalance(parseFloat(storedBalance));
         }
     }, []);
 
@@ -44,7 +49,9 @@ export const Navbar = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('username');
+        localStorage.removeItem('balance');
         setUsername('');
+        setBalance(0);
     };
 
     return (
@@ -73,6 +80,7 @@ export const Navbar = () => {
                         {username ? (
                             <>
                                 <span className="text-heading-2">{username}</span>
+                                <span className="text-heading-2">余额: {balance} 元</span>
                                 <BtnLink
                                     text="退出登录"
                                     href="#"
