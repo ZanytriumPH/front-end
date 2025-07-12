@@ -13,12 +13,13 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
     const [passwordError, setPasswordError] = useState('');
     const [confirmError, setConfirmError] = useState('');
     const [notification, setNotification] = useState({ message: '', visible: false, type: 'success' });
+    const [usernameError, setUsernameError] = useState(''); // 新增用户名错误状态
 
     useEffect(() => {
         if (notification.visible) {
             const timer = setTimeout(() => {
                 setNotification(prev => ({ ...prev, visible: false }));
-            }, 3000);
+            }, 2000);
             return () => clearTimeout(timer);
         }
     }, [notification.visible]);
@@ -29,6 +30,7 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
         setConfirmPassword('');
         setPasswordError('');
         setConfirmError('');
+        setUsernameError(''); // 切换表单时清空用户名错误
     };
 
     const handlePasswordChange = (e) => {
@@ -62,6 +64,14 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
         e.preventDefault();
         let isValid = true;
 
+        const username = e.target[0].value;
+        if (username.length > 6) {
+            setUsernameError('用户名不能超过6个字符');
+            isValid = false;
+        } else {
+            setUsernameError('');
+        }
+
         if (password.length < 6 || password.length > 12) {
             setPasswordError('密码长度必须为 6 到 12 个字符');
             isValid = false;
@@ -79,7 +89,6 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
         }
 
         if (isValid) {
-            const username = e.target[0].value;
             try {
                 let response;
                 if (isLogin) {
@@ -95,7 +104,11 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
                         visible: true,
                         type: 'success'
                     });
-                    setTimeout(onClose, 1500);
+                    setTimeout(onClose, 2000);
+                    // 登录成功后存储用户名
+                    localStorage.setItem('username', username);
+                    // 刷新页面
+                    window.location.reload();
                 } else {
                     console.error(`${isLogin ? '登录' : '注册'}失败：`, response.data.message);
                     setNotification({
@@ -145,7 +158,11 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
                         {isLogin ? '登录' : '注册'}
                     </h2>
                     <form onSubmit={handleSubmit}>
-                        <FormInput type="text" placeholder="用户名" />
+                        <FormInput
+                            type="text"
+                            placeholder="用户名"
+                            error={usernameError} // 显示用户名错误信息
+                        />
                         <FormInput
                             type="password"
                             placeholder="密码"

@@ -4,7 +4,7 @@ import logo from "../../assets/logo.png";
 import { NavItem } from "../shared/NavItem.jsx";
 import { BtnLink } from "../shared/BtnLink.jsx";
 import { useThemeStore } from "../../store/ThemeStore.jsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LoginRegisterCard } from "../cards/LoginRegisterCard.jsx";
 
 const navItems = [
@@ -25,6 +25,14 @@ const navItems = [
 export const Navbar = () => {
     const { toggleTheme, theme } = useThemeStore();
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [username, setUsername] = useState('');
+
+    useEffect(() => {
+        const storedUsername = localStorage.getItem('username');
+        if (storedUsername) {
+            setUsername(storedUsername);
+        }
+    }, []);
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -34,13 +42,17 @@ export const Navbar = () => {
         setIsModalOpen(false);
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem('username');
+        setUsername('');
+    };
+
     return (
         <header className="fixed inset-x-0 top-0 z-50 py-3 bg-body">
             <Container>
                 <nav className="w-full flex justify-between gap-6 relative">
                     {/* Logo */}
                     <div className="min-w-max inline-flex relative">
-                        {/* 将 <a> 标签替换为 <div> 标签 */}
                         <div className="relative flex items-center gap-3">
                             <img src={logo} alt="logo" className="w-10 h-10" />
                             <div className="inline-flex text-lg font-semibold text-heading-1">
@@ -58,12 +70,24 @@ export const Navbar = () => {
 
                     {/* 登录/注册按钮和主题切换按钮 */}
                     <div className="min-w-max flex items-center gap-x-3">
-                        <BtnLink
-                            text="登录/注册"
-                            href="#"
-                            className=""
-                            onClick={openModal}
-                        />
+                        {username ? (
+                            <>
+                                <span className="text-heading-2">{username}</span>
+                                <BtnLink
+                                    text="退出登录"
+                                    href="#"
+                                    className=""
+                                    onClick={handleLogout}
+                                />
+                            </>
+                        ) : (
+                            <BtnLink
+                                text="登录/注册"
+                                href="#"
+                                className=""
+                                onClick={openModal}
+                            />
+                        )}
                         <button
                             onClick={toggleTheme}
                             className="outline-hidden border-2 flex relative text-heading-2 rounded-full p-1 lg:p-1 border-box-border cursor-pointer"
