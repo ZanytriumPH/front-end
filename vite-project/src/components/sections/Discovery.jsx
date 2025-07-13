@@ -5,84 +5,6 @@ import { ActivityCard } from '../cards/ActivityCard.jsx';
 import { BtnLink } from '../shared/BtnLink.jsx';
 import { ActivityList } from '../elements/ActivityList.jsx'; // 引入 ActivityList 组件
 
-// 定义活动数据（移至组件外部确保全局可用）
-// export const activities = [
-//     {
-//         id: 1,
-//         title: '篮球比赛',
-//         time: '2024-10-01 14:00',
-//         location: '体育馆 1 号场地',
-//         price: '¥50',
-//         image: '../../public/vite.svg', // 替换为实际的图片 URL
-//         total: 20, // 可根据实际情况修改活动总人数
-//         signedUp: 12
-//     },
-//     {
-//         id: 2,
-//         title: '足球友谊赛',
-//         time: '2024-10-02 15:30',
-//         location: '足球场',
-//         price: '¥60',
-//         image: '../../src/assets/HeroImg.png', // 替换为实际的图片 URL
-//         total: 25, // 可根据实际情况修改活动总人数
-//         signedUp: 8
-//     },
-//     {
-//         id: 3,
-//         title: '羽毛球训练',
-//         time: '2024-10-03 10:00',
-//         location: '羽毛球场',
-//         price: '¥30',
-//         image: 'https://example.com/badminton.jpg', // 替换为实际的图片 URL
-//         total: 15 // 可根据实际情况修改活动总人数
-//     },
-//     {
-//         id: 4,
-//         title: '月抛球训练',
-//         time: '2024-10-03 10:00',
-//         location: '羽毛球场',
-//         price: '免费',
-//         image: 'https://example.com/badminton.jpg', // 替换为实际的图片 URL
-//         total: 18 // 可根据实际情况修改活动总人数
-//     },
-//     {
-//         id: 5,
-//         title: '排球比赛',
-//         time: '2024-10-04 16:00',
-//         location: '排球场',
-//         price: '¥80',
-//         image: 'https://example.com/volleyball.jpg', // 替换为实际的图片 URL
-//         total: 22 // 可根据实际情况修改活动总人数
-//     },
-//     {
-//         id: 6,
-//         title: '羽毛球训练',
-//         time: '2024-10-04 16:00',
-//         location: '羽毛球场',
-//         price: '¥30',
-//         image: 'https://example.com/badminton.jpg', // 替换为实际的图片 URL
-//         total: 16 // 可根据实际情况修改活动总人数
-//     },
-//     {
-//         id: 7,
-//         title: '篮球比赛',
-//         time: '2024-10-05 14:00',
-//         location: '体育馆 1 号场地',
-//         price: '¥50',
-//         image: 'https://example.com/basketball.jpg', // 替换为实际的图片 URL
-//         total: 20 // 可根据实际情况修改活动总人数
-//     },
-//     {
-//         id: 8,
-//         title: '羽毛球训练',
-//         time: '2024-10-05 16:00',
-//         location: '羽毛球场',
-//         price: '¥30',
-//         image: 'https://example.com/badminton.jpg', // 替换为实际的图片 URL
-//         total: 17 // 可根据实际情况修改活动总人数
-//     },
-// ];
-
 export const Discovery = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
@@ -196,7 +118,7 @@ export const Discovery = () => {
                                 </svg>
                             </button>
                         </div>
-                        <ActivityList />
+                        <ActivityList activities={activities} />
                     </div>
                 </div>
             )}

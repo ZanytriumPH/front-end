@@ -20,8 +20,12 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
         const fetchActivityDetail = async () => {
             try {
                 const response = await fetch(`/api/activities/${id}`);
-                const data = await response.json();
-                setActivity(data);
+                const result = await response.json(); // 将变量名改为 result 以避免混淆
+                if (result.success && result.data) {
+                    setActivity(result.data);
+                } else {
+                    console.error('获取活动详情失败:', result.message || '未知错误');
+                }
             } catch (error) {
                 console.error('获取活动详情失败:', error);
             }
@@ -31,6 +35,7 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
             fetchActivityDetail();
         }
     }, [id]);
+
 
     const handleCommentSubmit = (e) => {
         e.preventDefault();
@@ -72,7 +77,7 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
                 </div>
 
                 <img
-                    src="activity-image.jpg"
+                    src={activity?.image || 'default-image.jpg'}
                     alt="Activity"
                     className="w-full h-64 object-cover rounded-lg mb-6"
                 />
