@@ -95,7 +95,8 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
                     <span className="font-medium">报名情况：</span>{signedUp || 0}/{total || 0}
                 </p>
                 <p className="text-heading-3 mb-8">
-                    详细描述：这是一个非常精彩的体育活动，欢迎大家踊跃参加！
+                    {/*详细描述：这是一个非常精彩的体育活动，欢迎大家踊跃参加！*/}
+                    <span className="font-medium">详细描述：</span>{activity?.description || '这个活动目前还没有描述~'}
                 </p>
                 <h3 className="text-heading-2 text-xl font-bold mb-4">评论区</h3>
                 {comments.map(comment => (
