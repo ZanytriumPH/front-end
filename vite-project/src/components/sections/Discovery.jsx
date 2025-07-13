@@ -53,7 +53,7 @@ export const Discovery = () => {
         <section id="discovery" className="py-20">
             <Container>
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-                    <h2 className="text-heading-1 text-5xl font-bold">探索精彩活动</h2>
+                    <h2 className="text-heading-1 text-3xl sm:text-4xl md:text-5xl font-bold">探索精彩活动</h2>
                     <div className="flex gap-4 w-full md:w-auto">
                         <input
                             type="text"
@@ -74,7 +74,7 @@ export const Discovery = () => {
                 {Array.isArray(searchResults) && searchResults.length === 0 ? (
                     <p className="text-heading-3 text-center">暂无数据</p>
                 ) : (
-                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 mb-8">
+                    <div className="grid grid-cols-2 gap-6 md:grid-cols-2 lg:grid-cols-3 mb-8">
                         {searchResults.slice(0, 6).map((activity, index) => (
                             <ActivityCard
                                 key={index}
