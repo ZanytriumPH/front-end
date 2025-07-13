@@ -100,10 +100,8 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
                 } else {
                     console.log('即将发送注册请求，用户名:', username, '密码:', password); // 检查注册请求参数
                     response = await axios.post('/api/register', { username, password });
-                    console.log('即将获取用户信息，用户名:', username); // 检查获取用户信息请求参数
-
-                    // 修正：正确发送获取用户信息的请求，不传递balance参数
-                    response = await axios.get('/api/user', { params: { username } });
+                    // console.log('即将获取用户信息，用户名:', username); // 检查获取用户信息请求参数
+                    // response = await axios.get('/api/user', { params: { username } });
                     userData = response.data.data;
                 }
 
@@ -115,8 +113,12 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
                         type: 'success'
                     });
 
+                    //todo
+                    // response = await axios.get('/api/user', { params: { username } });
+                    // userData = response.data.data;
+
                     // 确保从响应中获取余额
-                    const balance = userData?.balance || 0;
+                    const balance = userData?.balance || null ; // 调试日志
 
                     // 登录成功后存储用户名和余额
                     localStorage.setItem('username', username);
@@ -124,9 +126,10 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
 
                     setTimeout(() => {
                         onClose();
+
                         // 刷新页面
-                        // window.location.reload();
-                    }, 2000);
+                        window.location.reload();
+                    }, 1500);
                 } else {
                     console.error(`${isLogin ? '登录' : '注册'}失败：`, response.data.message);
                     setNotification({
