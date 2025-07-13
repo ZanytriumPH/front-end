@@ -39,7 +39,7 @@ export const ActivityList = ({ activities = [] }) => {
                 {searchResults.length === 0 ? (
                     <p className="text-heading-3 text-center">暂无数据</p>
                 ) : (
-                    <div className="grid grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                         {searchResults.map((activity, index) => (
                             <ActivityCard
                                 key={index}

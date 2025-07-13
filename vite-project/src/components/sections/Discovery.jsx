@@ -74,7 +74,7 @@ export const Discovery = () => {
                 {Array.isArray(searchResults) && searchResults.length === 0 ? (
                     <p className="text-heading-3 text-center">暂无数据</p>
                 ) : (
-                    <div className="grid grid-cols-2 gap-6 md:grid-cols-3 mb-8">
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 mb-8">
                         {searchResults.slice(0, 6).map((activity, index) => (
                             <ActivityCard
                                 key={index}
