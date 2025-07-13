@@ -1,20 +1,14 @@
 // src/components/shared/BaseActivityDetail.jsx
 import React, {useEffect, useState} from 'react';
 import { BtnLink } from './BtnLink.jsx';
-// import { activities } from '../sections/Discovery.jsx'; // 导入活动数据
-
-// 模拟他人评论数据
-const initialComments = [
-    { id: 1, user: '张三', content: '这个活动看起来很有趣！' },
-    { id: 2, user: '李四', content: '期待参加！' },
-];
 
 export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, buttonText, onButtonClick }) => {
     if (!isOpen) return null;
 
     const [activity, setActivity] = useState(null);
-    const [comments, setComments] = useState(initialComments);
+    const [comments, setComments] = useState([]); // 初始化 comments 状态
     const [newComment, setNewComment] = useState('');
+    const [username, setUsername] = useState(localStorage.getItem('username') || '用户');
 
     useEffect(() => {
         const fetchActivityDetail = async () => {
@@ -23,6 +17,7 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
                 const result = await response.json(); // 将变量名改为 result 以避免混淆
                 if (result.success && result.data) {
                     setActivity(result.data);
+                    setComments(result.data.comments || []);
                 } else {
                     console.error('获取活动详情失败:', result.message || '未知错误');
                 }
@@ -36,13 +31,27 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
         }
     }, [id]);
 
-
-    const handleCommentSubmit = (e) => {
+    const handleCommentSubmit = async (e) => {
         e.preventDefault();
         if (newComment.trim()) {
-            const newId = comments.length > 0 ? comments[comments.length - 1].id + 1 : 1;
-            setComments([...comments, { id: newId, user: '用户', content: newComment }]);
-            setNewComment('');
+            try {
+                const response = await fetch(`/api/activities/${id}/comments`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, content: newComment }),
+                });
+                const result = await response.json();
+                if (result.success) {
+                    setComments([...comments, result.data]);
+                    setNewComment('');
+                } else {
+                    console.error('添加评论失败:', result.message);
+                }
+            } catch (error) {
+                console.error('添加评论失败:', error);
+            }
         }
     };
 
@@ -81,21 +90,20 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
                     alt="Activity"
                     className="w-full h-64 object-cover rounded-lg mb-6"
                 />
-                <h2 className="text-heading-1 text-3xl font-bold mb-4">{activity?.title || '活动标题'}</h2>
+                <h2 className="text-heading-1 text-3xl font-bold mb-4">{activity?.title || 'null'}</h2>
                 <p className="text-heading-3 mb-4">
-                    <span className="font-medium">时间：</span>{activity?.time || '2024-10-01 14:00'}
+                    <span className="font-medium">时间：</span>{activity?.time || 'null'}
                 </p>
                 <p className="text-heading-3 mb-4">
-                    <span className="font-medium">地点：</span>{activity?.location || '体育馆 1 号场地'}
+                    <span className="font-medium">地点：</span>{activity?.location || 'null'}
                 </p>
                 <p className="text-heading-3 mb-4">
-                    <span className="font-medium">价格：</span>{activity?.price || '免费'}
+                    <span className="font-medium">价格：</span>{activity?.price || 'null'}
                 </p>
                 <p className="text-heading-3 mb-6">
                     <span className="font-medium">报名情况：</span>{signedUp || 0}/{total || 0}
                 </p>
                 <p className="text-heading-3 mb-8">
-                    {/*详细描述：这是一个非常精彩的体育活动，欢迎大家踊跃参加！*/}
                     <span className="font-medium">详细描述：</span>{activity?.description || '这个活动目前还没有描述~'}
                 </p>
                 <h3 className="text-heading-2 text-xl font-bold mb-4">评论区</h3>
@@ -105,9 +113,10 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
                         className="bg-body p-4 rounded-lg border border-box-border mb-4 relative"
                     >
                         <p className="text-heading-3">
-                            <span className="font-medium">{comment.user}：</span>{comment.content}
+                            <span className="font-medium">{comment.username}：</span>{comment.content}
                         </p>
-                        {comment.user === '用户' && (
+                        <p className="text-sm text-gray-500">{comment.createdAt}</p>
+                        {comment.username === username && (
                             <button
                                 className="absolute top-2 right-2 text-white bg-red-500 hover:bg-red-600 px-2 py-1 rounded-md cursor-pointer"
                                 onClick={() => handleCommentDelete(comment.id)}
