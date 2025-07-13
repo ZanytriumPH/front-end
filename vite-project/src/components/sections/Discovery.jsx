@@ -1,92 +1,116 @@
 // src/components/sections/Discovery.jsx
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Container } from '../shared/Container.jsx';
 import { ActivityCard } from '../cards/ActivityCard.jsx';
 import { BtnLink } from '../shared/BtnLink.jsx';
 import { ActivityList } from '../elements/ActivityList.jsx'; // 引入 ActivityList 组件
 
 // 定义活动数据（移至组件外部确保全局可用）
-export const activities = [
-    {
-        id: 1,
-        title: '篮球比赛',
-        time: '2024-10-01 14:00',
-        location: '体育馆 1 号场地',
-        price: '¥50',
-        image: '../../public/vite.svg', // 替换为实际的图片 URL
-        total: 20, // 可根据实际情况修改活动总人数
-        signedUp: 12
-    },
-    {
-        id: 2,
-        title: '足球友谊赛',
-        time: '2024-10-02 15:30',
-        location: '足球场',
-        price: '¥60',
-        image: '../../src/assets/HeroImg.png', // 替换为实际的图片 URL
-        total: 25, // 可根据实际情况修改活动总人数
-        signedUp: 8
-    },
-    {
-        id: 3,
-        title: '羽毛球训练',
-        time: '2024-10-03 10:00',
-        location: '羽毛球场',
-        price: '¥30',
-        image: 'https://example.com/badminton.jpg', // 替换为实际的图片 URL
-        total: 15 // 可根据实际情况修改活动总人数
-    },
-    {
-        id: 4,
-        title: '月抛球训练',
-        time: '2024-10-03 10:00',
-        location: '羽毛球场',
-        price: '免费',
-        image: 'https://example.com/badminton.jpg', // 替换为实际的图片 URL
-        total: 18 // 可根据实际情况修改活动总人数
-    },
-    {
-        id: 5,
-        title: '排球比赛',
-        time: '2024-10-04 16:00',
-        location: '排球场',
-        price: '¥80',
-        image: 'https://example.com/volleyball.jpg', // 替换为实际的图片 URL
-        total: 22 // 可根据实际情况修改活动总人数
-    },
-    {
-        id: 6,
-        title: '羽毛球训练',
-        time: '2024-10-04 16:00',
-        location: '羽毛球场',
-        price: '¥30',
-        image: 'https://example.com/badminton.jpg', // 替换为实际的图片 URL
-        total: 16 // 可根据实际情况修改活动总人数
-    },
-    {
-        id: 7,
-        title: '篮球比赛',
-        time: '2024-10-05 14:00',
-        location: '体育馆 1 号场地',
-        price: '¥50',
-        image: 'https://example.com/basketball.jpg', // 替换为实际的图片 URL
-        total: 20 // 可根据实际情况修改活动总人数
-    },
-    {
-        id: 8,
-        title: '羽毛球训练',
-        time: '2024-10-05 16:00',
-        location: '羽毛球场',
-        price: '¥30',
-        image: 'https://example.com/badminton.jpg', // 替换为实际的图片 URL
-        total: 17 // 可根据实际情况修改活动总人数
-    },
-];
+// export const activities = [
+//     {
+//         id: 1,
+//         title: '篮球比赛',
+//         time: '2024-10-01 14:00',
+//         location: '体育馆 1 号场地',
+//         price: '¥50',
+//         image: '../../public/vite.svg', // 替换为实际的图片 URL
+//         total: 20, // 可根据实际情况修改活动总人数
+//         signedUp: 12
+//     },
+//     {
+//         id: 2,
+//         title: '足球友谊赛',
+//         time: '2024-10-02 15:30',
+//         location: '足球场',
+//         price: '¥60',
+//         image: '../../src/assets/HeroImg.png', // 替换为实际的图片 URL
+//         total: 25, // 可根据实际情况修改活动总人数
+//         signedUp: 8
+//     },
+//     {
+//         id: 3,
+//         title: '羽毛球训练',
+//         time: '2024-10-03 10:00',
+//         location: '羽毛球场',
+//         price: '¥30',
+//         image: 'https://example.com/badminton.jpg', // 替换为实际的图片 URL
+//         total: 15 // 可根据实际情况修改活动总人数
+//     },
+//     {
+//         id: 4,
+//         title: '月抛球训练',
+//         time: '2024-10-03 10:00',
+//         location: '羽毛球场',
+//         price: '免费',
+//         image: 'https://example.com/badminton.jpg', // 替换为实际的图片 URL
+//         total: 18 // 可根据实际情况修改活动总人数
+//     },
+//     {
+//         id: 5,
+//         title: '排球比赛',
+//         time: '2024-10-04 16:00',
+//         location: '排球场',
+//         price: '¥80',
+//         image: 'https://example.com/volleyball.jpg', // 替换为实际的图片 URL
+//         total: 22 // 可根据实际情况修改活动总人数
+//     },
+//     {
+//         id: 6,
+//         title: '羽毛球训练',
+//         time: '2024-10-04 16:00',
+//         location: '羽毛球场',
+//         price: '¥30',
+//         image: 'https://example.com/badminton.jpg', // 替换为实际的图片 URL
+//         total: 16 // 可根据实际情况修改活动总人数
+//     },
+//     {
+//         id: 7,
+//         title: '篮球比赛',
+//         time: '2024-10-05 14:00',
+//         location: '体育馆 1 号场地',
+//         price: '¥50',
+//         image: 'https://example.com/basketball.jpg', // 替换为实际的图片 URL
+//         total: 20 // 可根据实际情况修改活动总人数
+//     },
+//     {
+//         id: 8,
+//         title: '羽毛球训练',
+//         time: '2024-10-05 16:00',
+//         location: '羽毛球场',
+//         price: '¥30',
+//         image: 'https://example.com/badminton.jpg', // 替换为实际的图片 URL
+//         total: 17 // 可根据实际情况修改活动总人数
+//     },
+// ];
 
 export const Discovery = () => {
     const [searchQuery, setSearchQuery] = useState('');
-    const [searchResults, setSearchResults] = useState(activities);
+    const [searchResults, setSearchResults] = useState([]);
     const [isActivityListOpen, setIsActivityListOpen] = useState(false); // 新增状态
+    const [activities, setActivities] = useState([]); // 新新增状态，用于存储从数据库获取的活动数据
+
+    useEffect(() => {
+        const fetchActivities = async () => {
+            try {
+                const response = await fetch('/api/activities');
+                const result = await response.json(); // 将变量名改为 result 以避免混淆
+                if (result.success && Array.isArray(result.data)) {
+                    setActivities(result.data);
+                    setSearchResults(result.data);
+                } else {
+                    console.error('获取的数据不是预期格式:', result);
+                    setActivities([]);
+                    setSearchResults([]);
+                }
+            } catch (error) {
+                console.error('获取活动数据失败:', error);
+                setActivities([]);
+                setSearchResults([]);
+            }
+        };
+
+        fetchActivities();
+    }, []);
 
     const handleSearch = () => {
         const filteredResults = activities.filter(activity =>
@@ -125,7 +149,7 @@ export const Discovery = () => {
                     </div>
                 </div>
 
-                {searchResults.length === 0 ? (
+                {Array.isArray(searchResults) && searchResults.length === 0 ? (
                     <p className="text-heading-3 text-center">暂无数据</p>
                 ) : (
                     <div className="grid grid-cols-2 gap-6 md:grid-cols-3 mb-8">
@@ -138,7 +162,6 @@ export const Discovery = () => {
                                 location={activity.location}
                                 price={activity.price}
                                 image={activity.image} // 传递图片 URL
-
                                 signedUp={activity.signedUp}
                                 total={activity.total} // 传递活动总人数
                             />

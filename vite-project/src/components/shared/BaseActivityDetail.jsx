@@ -1,7 +1,7 @@
 // src/components/shared/BaseActivityDetail.jsx
-import React, { useState } from 'react';
-import { BtnLink } from '../shared/BtnLink.jsx';
-import { activities } from '../sections/Discovery.jsx'; // 导入活动数据
+import React, {useEffect, useState} from 'react';
+import { BtnLink } from './BtnLink.jsx';
+// import { activities } from '../sections/Discovery.jsx'; // 导入活动数据
 
 // 模拟他人评论数据
 const initialComments = [
@@ -12,9 +12,25 @@ const initialComments = [
 export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, buttonText, onButtonClick }) => {
     if (!isOpen) return null;
 
-    const activity = activities.find(act => act.id === parseInt(id)); // 找到对应的活动信息
+    const [activity, setActivity] = useState(null);
     const [comments, setComments] = useState(initialComments);
     const [newComment, setNewComment] = useState('');
+
+    useEffect(() => {
+        const fetchActivityDetail = async () => {
+            try {
+                const response = await fetch(`/api/activities/${id}`);
+                const data = await response.json();
+                setActivity(data);
+            } catch (error) {
+                console.error('获取活动详情失败:', error);
+            }
+        };
+
+        if (id) {
+            fetchActivityDetail();
+        }
+    }, [id]);
 
     const handleCommentSubmit = (e) => {
         e.preventDefault();

@@ -1,9 +1,9 @@
 // src/components/elements/ActivityList.jsx
 import React, { useState } from 'react';
 import { ActivityCard } from '../cards/ActivityCard.jsx';
-import { activities } from '../sections/Discovery.jsx'; // 导入活动数据
+// import { activities } from '../sections/Discovery.jsx'; // 导入活动数据
 
-export const ActivityList = () => {
+export const ActivityList = ({ activities }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState(activities);
 
