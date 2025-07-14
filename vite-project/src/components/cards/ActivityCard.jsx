@@ -1,10 +1,14 @@
 // src/components/cards/ActivityCard.jsx
 import { BaseActivity } from '../shared/BaseActivity.jsx';
+import { useNavigate } from 'react-router-dom';
 
 export const ActivityCard = ({ title, time, location, price = '¥0', id, image, signedUp = 0, total = 0 }) => {
+    const navigate = useNavigate();
+
     const handleSignUp = (e) => {
         e.preventDefault();
-        // 可以在这里添加报名逻辑
+        navigate(`/ActivityDetail/${id}`); // 导航到活动详情页
+        window.location.reload(); // 刷新页面
     };
 
     return (

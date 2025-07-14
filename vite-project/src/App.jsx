@@ -7,6 +7,7 @@ import { Hero } from "./components/sections/Hero.jsx";
 import { ActivityList } from "./components/sections/ActivityList.jsx";
 import { Mine } from "./components/sections/Mine.jsx";
 import { RouteSwitchButtons } from './components/elements/RouteSwitchButtons.jsx';
+import { ActivityDetail } from './components/sections/ActivityDetail.jsx'; // 新增导入
 
 function App() {
     return (
@@ -36,6 +37,7 @@ const AnimatedRoutes = () => {
                     <Route path="/" element={<Hero />} />
                     <Route path="/ActivityList" element={<ActivityList />} />
                     <Route path="/Mine" element={<Mine />} />
+                    <Route path="/ActivityDetail/:id" element={<ActivityDetail />} /> {/* 新增路由 */}
                 </Routes>
             </CSSTransition>
         </TransitionGroup>

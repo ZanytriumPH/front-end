@@ -1,7 +1,6 @@
 // src/components/cards/BaseActivity.jsx
-import React, { useState } from 'react';
+import React from 'react';
 import { BtnLink } from './BtnLink.jsx';
-import { ActivityDetailCard } from '../cards/ActivityDetailCard.jsx';
 
 export const BaseActivity = ({
                                      title,
@@ -15,19 +14,14 @@ export const BaseActivity = ({
                                      buttonText,
                                      onButtonClick
                                  }) => {
-    const [isDetailOpen, setIsDetailOpen] = useState(false);
 
     const handleViewDetails = (e) => {
         e.preventDefault();
         if (onButtonClick) {
             onButtonClick(e);
         }
-        setIsDetailOpen(true);
     };
 
-    const handleCloseDetail = () => {
-        setIsDetailOpen(false);
-    };
 
     return (
         // 渐变边框实则为p-1的容器
@@ -52,15 +46,6 @@ export const BaseActivity = ({
                     <BtnLink href="#" text={buttonText} onClick={handleViewDetails} />
                 </div>
             </div>
-            {isDetailOpen && (
-                <ActivityDetailCard
-                    isOpen={isDetailOpen}
-                    onClose={handleCloseDetail}
-                    id={id}
-                    signedUp={signedUp}
-                    total={total}
-                />
-            )}
         </div>
     );
 };
