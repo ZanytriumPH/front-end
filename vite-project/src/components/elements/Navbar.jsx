@@ -7,26 +7,13 @@ import { useThemeStore } from "../../store/ThemeStore.jsx";
 import { useState, useEffect } from "react";
 import { LoginRegisterCard } from "../cards/LoginRegisterCard.jsx";
 
-const navItems = [
-    {
-        href: "/",
-        text: "首页",
-    },
-    {
-        href: "/ActivityList",
-        text: "活动列表",
-    },
-    {
-        href: "/Mine",
-        text: "我的",
-    },
-];
-
 export const Navbar = () => {
     const { toggleTheme, theme } = useThemeStore();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [username, setUsername] = useState('');
     const [balance, setBalance] = useState(100);
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
@@ -37,6 +24,19 @@ export const Navbar = () => {
         if (storedBalance) {
             setBalance(parseFloat(storedBalance));
         }
+
+        const handleScroll = () => {
+            if (window.scrollY > 10) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
     }, []);
 
     const openModal = () => {
@@ -54,8 +54,12 @@ export const Navbar = () => {
         setBalance(0);
     };
 
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
     return (
-        <header className="fixed inset-x-0 top-0 z-50 py-4 bg-body bg-box-bg">
+        <header className={`fixed inset-x-0 top-0 z-50 py-4 bg-body bg-box-bg ${isScrolled ? 'py-2 shadow-md' : 'py-4 shadow-sm'} transition-navbar`}>
             <Container>
                 <nav className="w-full flex justify-between gap-6 relative">
                     {/* Logo */}
@@ -132,10 +136,52 @@ export const Navbar = () => {
                                 </svg>
                             )}
                         </button>
+                        <button
+                            className="lg:hidden text-heading-2 cursor-pointer"
+                            onClick={toggleMobileMenu}
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth="1.5"
+                                stroke="currentColor"
+                                className="w-6 h-6"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                                />
+                            </svg>
+                        </button>
                     </div>
                 </nav>
             </Container>
             <LoginRegisterCard isOpen={isModalOpen} onClose={closeModal} />
+            <div className={`lg:hidden ${isMobileMenuOpen ? 'block animate-fade-in' : 'hidden'}`}>
+                {/* 移动端菜单内容 */}
+                <ul className="flex flex-col gap-x-3 text-lg text-heading-2 items-center">
+                    {navItems.map((item, key) => (
+                        <NavItem href={item.href} text={item.text} key={key} />
+                    ))}
+                </ul>
+            </div>
         </header>
     );
 };
+
+const navItems = [
+    {
+        href: "/",
+        text: "首页",
+    },
+    {
+        href: "/ActivityList",
+        text: "活动列表",
+    },
+    {
+        href: "/Mine",
+        text: "我的",
+    },
+];
