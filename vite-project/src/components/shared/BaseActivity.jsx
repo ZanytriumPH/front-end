@@ -30,8 +30,9 @@ export const BaseActivity = ({
     };
 
     return (
-        <>
-            <div className="bg-box-bg p-6 rounded-xl border-gradient-to-r border-4 relative">
+        // 渐变边框实则为p-1的容器
+        <div className={'bg-gradient-to-r from-blue-600 to-violet-600 p-1 rounded-3xl'}>
+            <div className="bg-box-bg p-6 relative rounded-3xl">
                 {/* 添加图片显示 */}
                 {image && <img src={image} alt={title} className="w-full h-48 object-cover rounded-lg mb-4" />}
                 <div className="absolute top-4 right-4 text-red-500 font-bold text-3xl bg-price p-1 rounded">
@@ -60,6 +61,6 @@ export const BaseActivity = ({
                     total={total}
                 />
             )}
-        </>
+        </div>
     );
 };

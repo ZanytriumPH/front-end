@@ -41,12 +41,11 @@ html.dark {
   .text-heading-3 {
     color: rgb(var(--heading-3));
   }
-  .border-gradient-to-r {
-    border-image: linear-gradient(to right, blue, purple) 1;
-  }
+
   /* 添加自定义 text-shadow 类 */
   .text-shadow-red {
     text-shadow: 0 0 3px rgba(255, 0, 0, 0.8); /* 可以根据需要调整阴影的颜色和大小 */
+    border-radius: 1rem;
   }
   /* 添加价格背景颜色类 */
   .bg-price {
