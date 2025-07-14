@@ -1,11 +1,17 @@
 // src/components/elements/Navbar.jsx
 import { Container } from "../shared/Container.jsx";
 import logo from "../../assets/logo.png";
-import { NavItem } from "../shared/NavItem.jsx";
 import { BtnLink } from "../shared/BtnLink.jsx";
 import { useThemeStore } from "../../store/ThemeStore.jsx";
 import { useState, useEffect } from "react";
 import { LoginRegisterCard } from "../cards/LoginRegisterCard.jsx";
+import { useLocation, useNavigate } from 'react-router-dom';
+
+const routes = [
+    { path: '/', name: '首页' },
+    { path: '/ActivityList', name: '活动列表' },
+    { path: '/Mine', name: '我的' }
+];
 
 export const Navbar = () => {
     const { toggleTheme, theme } = useThemeStore();
@@ -14,6 +20,10 @@ export const Navbar = () => {
     const [balance, setBalance] = useState(100);
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const location = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
@@ -38,6 +48,13 @@ export const Navbar = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
+    useEffect(() => {
+        const index = routes.findIndex(route => route.path === location.pathname);
+        if (index !== -1) {
+            setCurrentIndex(index);
+        }
+    }, [location.pathname]);
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -72,12 +89,25 @@ export const Navbar = () => {
                         </div>
                     </div>
 
-                    {/* 导航项 */}
-                    <ul className="hidden lg:flex gap-x-3 text-lg text-heading-2 items-center">
-                        {navItems.map((item, key) => (
-                            <NavItem href={item.href} text={item.text} key={key} />
+                    {/* 路由指示器 */}
+                    <div className="flex items-center mx-6 space-x-3 lg:flex md:hidden sm:hidden">
+                        {routes.map((route, index) => (
+                            <div
+                                key={route.path}
+                                className={`relative transition-all duration-300 cursor-pointer group ${currentIndex === index ? 'opacity-100' : 'opacity-50'}`}
+                                onClick={() => {
+                                    if (index !== currentIndex) {
+                                        navigate(route.path);
+                                        window.location.reload();
+                                    }
+                                }}
+                            >
+                                <div className={`absolute bottom-0 left-0 w-full h-1 bg-violet-600 transition-all duration-300 ${currentIndex === index ? 'scale-x-100' : 'scale-x-0'}`}></div>
+                                {/* 添加自定义类名来增大并加粗字体 */}
+                                <span className="text-heading-2 font-bold text-xl">{route.name}</span>
+                            </div>
                         ))}
-                    </ul>
+                    </div>
 
                     {/* 登录/注册按钮和主题切换按钮 */}
                     <div className="min-w-max flex items-center gap-x-3">
@@ -162,26 +192,26 @@ export const Navbar = () => {
             <div className={`lg:hidden ${isMobileMenuOpen ? 'block animate-fade-in' : 'hidden'}`}>
                 {/* 移动端菜单内容 */}
                 <ul className="flex flex-col gap-x-3 text-lg text-heading-2 items-center">
-                    {navItems.map((item, key) => (
-                        <NavItem href={item.href} text={item.text} key={key} />
+                    {routes.map((route, index) => (
+                        <li key={index}>
+                            <a
+                                href={route.path}
+                                className={`duration-300 font-medium ease-linear hover:text-primary py-3 ${currentIndex === index ? 'text-primary' : ''} font-bold text-xl`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    if (index !== currentIndex) {
+                                        navigate(route.path);
+                                        window.location.reload();
+                                    }
+                                    toggleMobileMenu();
+                                }}
+                            >
+                                {route.name}
+                            </a>
+                        </li>
                     ))}
                 </ul>
             </div>
         </header>
     );
 };
-
-const navItems = [
-    {
-        href: "/",
-        text: "首页",
-    },
-    {
-        href: "/ActivityList",
-        text: "活动列表",
-    },
-    {
-        href: "/Mine",
-        text: "我的",
-    },
-];

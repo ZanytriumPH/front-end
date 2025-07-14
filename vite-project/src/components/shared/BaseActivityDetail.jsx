@@ -90,7 +90,7 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-transparent">
-            <div className="bg-box-bg p-12 rounded-lg border-4 relative w-11/12 max-w-3xl max-h-[80vh] overflow-y-auto">
+            <div className="bg-box-bg p-12 rounded-lg border-4 relative w-11/12 max-w-3xl border-gradient-to-r max-h-[80vh] overflow-y-auto">
                 <div className="absolute top-3 right-7 text-heading-2 cursor-pointer z-50">
                     <button
                         className={`cursor-pointer fixed `}

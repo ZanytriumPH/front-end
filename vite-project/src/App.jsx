@@ -6,6 +6,7 @@ import { Layout } from "./components/Layout.jsx";
 import { Hero } from "./components/sections/Hero.jsx";
 import { ActivityList } from "./components/sections/ActivityList.jsx";
 import { Mine } from "./components/sections/Mine.jsx";
+import { RouteSwitchButtons } from './components/elements/RouteSwitchButtons.jsx';
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                 <div className="router-view">
                     <AnimatedRoutes /> {/* 使用动画路由组件 */}
                 </div>
+                <RouteSwitchButtons />
             </Layout>
         </Router>
     );

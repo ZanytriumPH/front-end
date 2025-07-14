@@ -100,8 +100,6 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
                 } else {
                     console.log('即将发送注册请求，用户名:', username, '密码:', password); // 检查注册请求参数
                     response = await axios.post('/api/register', { username, password });
-                    // console.log('即将获取用户信息，用户名:', username); // 检查获取用户信息请求参数
-                    // response = await axios.get('/api/user', { params: { username } });
                     userData = response.data.data;
                 }
 
@@ -112,10 +110,6 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
                         visible: true,
                         type: 'success'
                     });
-
-                    //todo
-                    // response = await axios.get('/api/user', { params: { username } });
-                    // userData = response.data.data;
 
                     // 确保从响应中获取余额
                     const balance = userData?.balance || null ; // 调试日志
@@ -155,7 +149,7 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
         <>
             <Notification message={notification.message} visible={notification.visible} type={notification.type} />
             <div className="fixed inset-0 z-40 flex items-center justify-center bg-transparent">
-                <div className={`bg-box-bg p-12 rounded-lg border-4 relative w-96 border-gradient-to-r from-blue-600 to-violet-600`}>
+                <div className={`bg-box-bg p-12 rounded-lg border-4 relative w-96 border-gradient-to-r`}>
                     <button
                         className="absolute top-4 right-4 text-heading-2 cursor-pointer"
                         onClick={onClose}
