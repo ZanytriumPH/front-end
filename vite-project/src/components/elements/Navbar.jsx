@@ -9,15 +9,15 @@ import { LoginRegisterCard } from "../cards/LoginRegisterCard.jsx";
 
 const navItems = [
     {
-        href: "#",
+        href: "/",
         text: "首页",
     },
     {
-        href: "#discovery",
-        text: "发现",
+        href: "/ActivityList",
+        text: "活动列表",
     },
     {
-        href: "#mine",
+        href: "/Mine",
         text: "我的",
     },
 ];
@@ -55,7 +55,7 @@ export const Navbar = () => {
     };
 
     return (
-        <header className="fixed inset-x-0 top-0 z-50 py-3 bg-body">
+        <header className="fixed inset-x-0 top-0 z-50 py-4 bg-body bg-box-bg">
             <Container>
                 <nav className="w-full flex justify-between gap-6 relative">
                     {/* Logo */}
