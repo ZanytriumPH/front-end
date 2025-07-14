@@ -1,6 +1,19 @@
 // src/components/shared/BaseActivityDetail.jsx
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { BtnLink } from './BtnLink.jsx';
+
+const formatDate = (dateString) => {
+    // 处理可能传入的 ISO 8601 格式字符串或 Date 对象
+    const date = typeof dateString === 'string' ? new Date(dateString) : dateString;
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
+};
 
 export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, buttonText, onButtonClick }) => {
     if (!isOpen) return null;
@@ -17,7 +30,13 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
                 const result = await response.json(); // 将变量名改为 result 以避免混淆
                 if (result.success && result.data) {
                     setActivity(result.data);
-                    setComments(result.data.comments || []);
+
+                    const formattedComments = (result.data.comments || []).map(comment => ({
+                        ...comment,
+                        createdAt: formatDate(comment.createdAt)
+                    }));
+
+                    setComments(formattedComments);
                 } else {
                     console.error('获取活动详情失败:', result.message || '未知错误');
                 }
@@ -35,16 +54,23 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
         e.preventDefault();
         if (newComment.trim()) {
             try {
+                const currentDate = new Date();
+                const formattedDate = formatDate(currentDate);
                 const response = await fetch(`/api/activities/${id}/comments`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ username, content: newComment }),
+                    body: JSON.stringify({ username, content: newComment, createdAt: formattedDate }),
                 });
                 const result = await response.json();
                 if (result.success) {
-                    setComments([...comments, result.data]);
+                    // 确保新添加的评论也使用相同的时间格式
+                    const newCommentWithFormattedDate = {
+                        ...result.data,
+                        createdAt: formattedDate
+                    };
+                    setComments([...comments, newCommentWithFormattedDate]);
                     setNewComment('');
                 } else {
                     console.error('添加评论失败:', result.message);
@@ -110,15 +136,17 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
                 {comments.map(comment => (
                     <div
                         key={comment.id}
-                        className="bg-body p-4 rounded-lg border border-box-border mb-4 relative"
+                        className="bg-body p-4 rounded-lg border border-box-border mb-4 relative flex items-center" // 添加 flex 和 items-center 类
                     >
-                        <p className="text-heading-3">
-                            <span className="font-medium">{comment.username}：</span>{comment.content}
-                        </p>
-                        <p className="text-sm text-gray-500">{comment.createdAt}</p>
+                        <div className="flex-1">
+                            <p className="text-heading-3">
+                                <span className="font-medium">{comment.username}：</span>{comment.content}
+                            </p>
+                            <p className="text-sm text-gray-500">{comment.createdAt}</p>
+                        </div>
                         {comment.username === username && (
                             <button
-                                className="absolute top-2 right-2 text-white bg-red-500 hover:bg-red-600 px-2 py-1 rounded-md cursor-pointer"
+                                className="text-white bg-red-500 hover:bg-red-600 px-2 py-1 rounded-md cursor-pointer"
                                 onClick={() => handleCommentDelete(comment.id)}
                             >
                                 删除
