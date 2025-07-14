@@ -70,9 +70,22 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
         }
     };
 
-    const handleCommentDelete = (id) => {
-        const updatedComments = comments.filter(comment => comment.id!== id);
-        setComments(updatedComments);
+    const handleCommentDelete = async (commentId) => {
+        try {
+            console.log('删除评论的 ID:', commentId); // 添加日志
+            const response = await fetch(`/api/activities/${id}/comments/${commentId}`, {
+                method: 'DELETE',
+            });
+            const result = await response.json();
+            if (result.success) {
+                const updatedComments = comments.filter(comment => comment.id!== commentId);
+                setComments(updatedComments);
+            } else {
+                console.error('删除评论失败:', result.message);
+            }
+        } catch (error) {
+            console.error('删除评论失败:', error);
+        }
     };
 
     return (
