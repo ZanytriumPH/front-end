@@ -1,25 +1,15 @@
 // src/components/shared/BaseActivityDetail.jsx
 import React, { useEffect, useState } from 'react';
 import { BtnLink } from './BtnLink.jsx';
-
-const formatDate = (dateString) => {
-    // 处理可能传入的 ISO 8601 格式字符串或 Date 对象
-    const date = typeof dateString === 'string' ? new Date(dateString) : dateString;
-
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-
-    return `${year}-${month}-${day} ${hours}:${minutes}`;
-};
+import { formatDate } from '../../utils/dateUtils.js';
+import { CommentItem } from './CommentItem.jsx';
+import { CommentForm } from './CommentForm.jsx';
 
 export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, buttonText, onButtonClick }) => {
     if (!isOpen) return null;
 
     const [activity, setActivity] = useState(null);
-    const [comments, setComments] = useState([]); // 初始化 comments 状态
+    const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
     const [username, setUsername] = useState(localStorage.getItem('username') || '用户');
 
@@ -27,7 +17,7 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
         const fetchActivityDetail = async () => {
             try {
                 const response = await fetch(`/api/activities/${id}`);
-                const result = await response.json(); // 将变量名改为 result 以避免混淆
+                const result = await response.json();
                 if (result.success && result.data) {
                     setActivity(result.data);
 
@@ -65,7 +55,6 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
                 });
                 const result = await response.json();
                 if (result.success) {
-                    // 确保新添加的评论也使用相同的时间格式
                     const newCommentWithFormattedDate = {
                         ...result.data,
                         createdAt: formattedDate
@@ -134,41 +123,18 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
                 </p>
                 <h3 className="text-heading-2 text-xl font-bold mb-4">评论区</h3>
                 {comments.map(comment => (
-                    <div
+                    <CommentItem
                         key={comment.id}
-                        className="bg-body p-4 rounded-lg border border-box-border mb-4 relative flex items-center" // 添加 flex 和 items-center 类
-                    >
-                        <div className="flex-1">
-                            <p className="text-heading-3">
-                                <span className="font-medium">{comment.username}：</span>{comment.content}
-                            </p>
-                            <p className="text-sm text-gray-500">{comment.createdAt}</p>
-                        </div>
-                        {comment.username === username && (
-                            <button
-                                className="text-white bg-red-500 hover:bg-red-600 px-2 py-1 rounded-md cursor-pointer"
-                                onClick={() => handleCommentDelete(comment.id)}
-                            >
-                                删除
-                            </button>
-                        )}
-                    </div>
-                ))}
-                <form onSubmit={handleCommentSubmit} className="mb-8 flex gap-4">
-                    <input
-                        type="text"
-                        placeholder="发表评论"
-                        className="flex-1 p-3 border border-box-border rounded-md bg-body text-heading-3"
-                        value={newComment}
-                        onChange={(e) => setNewComment(e.target.value)}
+                        comment={comment}
+                        username={username}
+                        onDelete={handleCommentDelete}
                     />
-                    <button
-                        type="submit"
-                        className="px-6 py-3 rounded-full bg-violet-600 text-white hover:scale-102 cursor-pointer"
-                    >
-                        提交评论
-                    </button>
-                </form>
+                ))}
+                <CommentForm
+                    newComment={newComment}
+                    setNewComment={setNewComment}
+                    onSubmit={handleCommentSubmit}
+                />
                 <div className="text-center">
                     <BtnLink href="#" text={buttonText} onClick={onButtonClick} />
                 </div>
