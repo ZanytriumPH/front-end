@@ -10,6 +10,7 @@ export const ActivityDetail = () => {
     const [activity, setActivity] = useState(null);
     const [signedUp, setSignedUp] = useState(0);
     const [total, setTotal] = useState(0);
+    const [username] = useState(localStorage.getItem('username') || '用户');
 
     useEffect(() => {
         const fetchActivityDetail = async () => {
@@ -33,9 +34,34 @@ export const ActivityDetail = () => {
         }
     }, [id]);
 
-    const handleSignUp = (e) => {
+    const handleSignUp = async (e) => {
         e.preventDefault();
-        // 可以在这里添加报名逻辑
+        try {
+            const userName = localStorage.getItem('username'); // 从 localStorage 获取 userName
+            if (!userName) {
+                alert('请先登录');
+                return;
+            }
+
+            const response = await fetch(`/api/activities/${id}/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ userName }),
+            });
+            const result = await response.json();
+            if (result.success) {
+                alert('报名成功');
+                // 刷新页面或更新活动信息
+                window.location.reload();
+            } else {
+                alert(result.message);
+            }
+        } catch (error) {
+            console.error('报名失败:', error);
+            alert('报名失败，请稍后重试');
+        }
     };
 
     const handleClose = () => {
