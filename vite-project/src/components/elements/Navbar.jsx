@@ -50,6 +50,13 @@ export const Navbar = () => {
     }, []);
 
     useEffect(() => {
+        const storedBalance = localStorage.getItem('balance');
+        if (storedBalance) {
+            setBalance(parseFloat(storedBalance));
+        }
+    }, [localStorage.getItem('balance')]);
+
+    useEffect(() => {
         const index = routes.findIndex(route => route.path === location.pathname);
         if (index !== -1) {
             setCurrentIndex(index);

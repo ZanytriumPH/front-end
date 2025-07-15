@@ -51,8 +51,11 @@ export const ActivityDetail = () => {
                 body: JSON.stringify({ userName }),
             });
             const result = await response.json();
+            const balance = localStorage.getItem('balance'); // 获取之前的用户余额
+            console.log('服务器返回的数据:', result); // 打印服务器返回的数据
             if (result.success) {
                 alert('报名成功');
+                localStorage.setItem('balance', (balance - activity.price).toString()); // 更新用户余额
                 // 刷新页面或更新活动信息
                 window.location.reload();
             } else {
