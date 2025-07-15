@@ -1,9 +1,9 @@
 // src/components/shared/BaseActivityDetail.jsx
-import React, { useEffect, useState } from 'react';
-import { useThemeStore } from '../../store/ThemeStore.jsx';
-import { formatDate } from '../../utils/dateUtils';
-import {CommentForm} from "./CommentForm.jsx";
+import {useEffect, useState} from "react";
+import {useThemeStore} from "../../store/ThemeStore.jsx";
+import {formatDate} from "../../utils/dateUtils.js";
 import {CommentItem} from "./CommentItem.jsx";
+import {CommentForm} from "./CommentForm.jsx";
 
 export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, buttonText, onButtonClick }) => {
     if (!isOpen) return null;
@@ -19,6 +19,7 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
             try {
                 const response = await fetch(`/api/activities/${id}`);
                 const result = await response.json();
+                console.log('服务器返回的活动详情数据:', result);
                 if (result.success && result.data) {
                     setActivity(result.data);
 
@@ -107,8 +108,8 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
                     </button>
                 </div>
 
-                {/* 内容区域 */}
-                <div className="overflow-y-auto flex-grow p-6 space-y-6">
+                {/* 内容区域 - 使用统一的space-y控制区块间距 */}
+                <div className="overflow-y-auto flex-grow p-6 space-y-5">
                     {/* 活动图片 */}
                     <div className="rounded-xl overflow-hidden shadow-md">
                         <img
@@ -118,8 +119,9 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
                         />
                     </div>
 
-                    {/* 活动信息网格 */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* 活动信息网格 - 统一使用gap-5确保内部项目间距一致 */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        {/* 时间行 */}
                         <div className="flex items-center">
                             <div className="bg-gray-100 p-3 rounded-lg mr-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -144,7 +146,11 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
                                 <p className="font-medium">{activity?.location || '未设置'}</p>
                             </div>
                         </div>
+                    </div>
 
+                    {/* 价格相关网格 - 保持与时间行相同的外部间距和内部gap */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        {/* 价格行 */}
                         <div className="flex items-center">
                             <div className="bg-gray-100 p-3 rounded-lg mr-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -168,6 +174,34 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
                                 <p className="font-medium">
                                     <span className="text-indigo-600">{signedUp || 0}</span> / {total || 0} 人
                                 </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* 活动发起人相关网格 - 保持一致的间距设置 */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        {/* 活动发起人 */}
+                        <div className="flex items-center">
+                            <div className="bg-gray-100 p-3 rounded-lg mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <p className="text-sm text-gray-500">活动发起人</p>
+                                <p className="font-medium">{activity?.organizer || '未设置'}</p>
+                            </div>
+                        </div>
+
+                        <div className="flex items-center">
+                            <div className="bg-gray-100 p-3 rounded-lg mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <p className="text-sm text-gray-500">联系方式</p>
+                                <p className="font-medium">{activity?.contact || '未设置'}</p>
                             </div>
                         </div>
                     </div>
@@ -233,3 +267,5 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
         </div>
     );
 };
+
+export default BaseActivityDetail;
