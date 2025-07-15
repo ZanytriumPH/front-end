@@ -88,18 +88,7 @@ const AnimatedRoutes = () => {
             />
             <Route
                 path="/ActivityDetail/:id"
-                element={
-                    <motion.div
-                        key={location.pathname}
-                        initial="initial"
-                        animate="in"
-                        exit="out"
-                        variants={pageVariants}
-                        transition={pageTransition}
-                    >
-                        <ActivityDetail />
-                    </motion.div>
-                }
+                element={<ActivityDetail />}
             />
         </Routes>
     );
