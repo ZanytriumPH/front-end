@@ -8,7 +8,6 @@ export const ActivityCard = ({ title, time, location, price = '¥0', id, image, 
     const handleSignUp = (e) => {
         e.preventDefault();
         navigate(`/ActivityDetail/${id}`); // 导航到活动详情页
-        // window.location.reload(); // 刷新页面
     };
 
     return (

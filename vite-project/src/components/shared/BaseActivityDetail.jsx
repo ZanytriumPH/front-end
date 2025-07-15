@@ -1,9 +1,9 @@
 // src/components/shared/BaseActivityDetail.jsx
 import React, { useEffect, useState } from 'react';
-import { formatDate } from '../../utils/dateUtils.js';
-import { CommentItem } from './CommentItem.jsx';
-import { CommentForm } from './CommentForm.jsx';
-import { useThemeStore } from '../../store/ThemeStore.jsx'; // 假设主题状态存储在 ThemeStore.jsx 中
+import { useThemeStore } from '../../store/ThemeStore.jsx';
+import { formatDate } from '../../utils/dateUtils';
+import {CommentForm} from "./CommentForm.jsx";
+import {CommentItem} from "./CommentItem.jsx";
 
 export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, buttonText, onButtonClick }) => {
     if (!isOpen) return null;
@@ -12,7 +12,7 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
     const [activity, setActivity] = useState(null);
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
-    const [username, setUsername] = useState(localStorage.getItem('username') || '用户');
+    const [username] = useState(localStorage.getItem('username') || '用户');
 
     useEffect(() => {
         const fetchActivityDetail = async () => {
@@ -77,6 +77,7 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
                 method: 'DELETE',
             });
             const result = await response.json();
+
             if (result.success) {
                 const updatedComments = comments.filter(comment => comment.id!== commentId);
                 setComments(updatedComments);
@@ -90,7 +91,6 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
 
     // 根据主题状态设置背景色
     const backgroundColorClass = theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-gray-800';
-
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm transition-opacity duration-300">
             <div className={`${backgroundColorClass} rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col`}>
@@ -174,8 +174,8 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
 
                     {/* 活动描述 */}
                     <div className="pt-4 border-t border-gray-200">
-                        <h3 className="text-lg font-semibold text-gray-800 mb-3">活动详情</h3>
-                        <p className="text-gray-600 leading-relaxed whitespace-pre-line">
+                        <h3 className="text-lg font-semibold text-heading-3 mb-3">活动详情</h3>
+                        <p className="text-heading-3 leading-relaxed whitespace-pre-line">
                             {activity?.description || '这个活动目前还没有描述~'}
                         </p>
                     </div>
@@ -183,7 +183,7 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
                     {/* 评论区 */}
                     <div className="pt-4 border-t border-gray-200">
                         <div className="flex justify-between items-center mb-4">
-                            <h3 className="text-lg font-semibold text-gray-800">评论区</h3>
+                            <h3 className="text-lg font-semibold text-heading-3">评论区</h3>
                             <span className="text-sm text-gray-500">{comments.length} 条评论</span>
                         </div>
 
@@ -219,7 +219,7 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
                 </div>
 
                 {/* 底部按钮 */}
-                <div className="p-5 bg-gray-50 border-t border-gray-200">
+                <div className="p-5 bg-box-bg border-t border-gray-200">
                     <div className="flex justify-center">
                         <button
                             onClick={onButtonClick}

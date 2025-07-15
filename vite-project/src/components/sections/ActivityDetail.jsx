@@ -1,10 +1,12 @@
 // src/components/sections/ActivityDetail.jsx
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { BaseActivityDetail } from '../shared/BaseActivityDetail.jsx';
 
 export const ActivityDetail = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
+    const location = useLocation();
     const [activity, setActivity] = useState(null);
     const [signedUp, setSignedUp] = useState(0);
     const [total, setTotal] = useState(0);
@@ -36,12 +38,16 @@ export const ActivityDetail = () => {
         // 可以在这里添加报名逻辑
     };
 
+    const handleClose = () => {
+        navigate(-1); // 返回上一个路由
+    };
+
     return (
         <div>
             {activity && (
                 <BaseActivityDetail
                     isOpen={true}
-                    onClose={() => {}}
+                    onClose={handleClose}
                     id={id}
                     signedUp={signedUp}
                     total={total}

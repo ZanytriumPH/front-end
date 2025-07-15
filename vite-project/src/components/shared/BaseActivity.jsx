@@ -22,7 +22,6 @@ export const BaseActivity = ({
         }
     };
 
-
     return (
         // 渐变边框实则为p-1的容器
         <div className={'bg-gradient-to-r from-blue-600 to-violet-600 p-1 rounded-3xl'}>
