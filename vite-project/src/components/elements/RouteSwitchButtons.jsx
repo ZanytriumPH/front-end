@@ -25,16 +25,21 @@ export const RouteSwitchButtons = () => {
     const handlePrevRoute = () => {
         if (currentIndex > 0) {
             navigate(routes[currentIndex - 1].path);
-            // window.location.reload();
         }
     };
 
     const handleNextRoute = () => {
         if (currentIndex < routes.length - 1) {
             navigate(routes[currentIndex + 1].path);
-            // window.location.reload();
         }
     };
+
+    // 判断当前路由是否为 ActivityDetail 界面
+    const isActivityDetail = location.pathname.includes('/ActivityDetail/');
+
+    if (isActivityDetail) {
+        return null;
+    }
 
     return (
         <>
