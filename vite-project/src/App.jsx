@@ -27,15 +27,16 @@ const AnimatedRoutes = () => {
     const location = useLocation();
 
     const pageVariants = {
-        initial: { opacity: 0, y: 10 },
+        initial: { opacity: 0, y: 20 }, // 稍微增加初始的偏移量
         in: { opacity: 1, y: 0 },
-        out: { opacity: 0, y: -10 }
+        out: { opacity: 0, y: -20 } // 稍微增加退出的偏移量
     };
 
     const pageTransition = {
-        type: 'tween',
-        ease: 'anticipate',
-        duration: 0.3
+        type: 'spring', // 使用弹簧过渡类型，使动画更柔和
+        damping: 10, // 阻尼值，控制弹簧的弹性程度
+        stiffness: 50, // 刚度值，控制弹簧的硬度
+        duration: 0.6 // 增加动画持续时间
     };
 
     return (
