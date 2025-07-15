@@ -128,3 +128,30 @@ body {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* 添加 Notification 组件的样式 */
+.notification {
+  position: fixed;
+  top: 20px; /* 距离顶部的距离 */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999; /* 确保层级足够高 */
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.notification.success {
+  background-color: #28a745; /* 成功通知的背景颜色 */
+}
+
+.notification.error {
+  background-color: #dc3545; /* 错误通知的背景颜色 */
+}
+
+.notification.visible {
+  opacity: 1;
+}
