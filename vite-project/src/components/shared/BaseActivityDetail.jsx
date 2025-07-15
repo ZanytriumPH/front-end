@@ -1,6 +1,5 @@
 // src/components/shared/BaseActivityDetail.jsx
 import React, { useEffect, useState } from 'react';
-import { BtnLink } from './BtnLink.jsx';
 import { formatDate } from '../../utils/dateUtils.js';
 import { CommentItem } from './CommentItem.jsx';
 import { CommentForm } from './CommentForm.jsx';

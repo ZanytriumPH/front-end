@@ -25,14 +25,14 @@ export const RouteSwitchButtons = () => {
     const handlePrevRoute = () => {
         if (currentIndex > 0) {
             navigate(routes[currentIndex - 1].path);
-            window.location.reload();
+            // window.location.reload();
         }
     };
 
     const handleNextRoute = () => {
         if (currentIndex < routes.length - 1) {
             navigate(routes[currentIndex + 1].path);
-            window.location.reload();
+            // window.location.reload();
         }
     };
 

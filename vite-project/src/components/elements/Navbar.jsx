@@ -98,7 +98,7 @@ export const Navbar = () => {
                                 onClick={() => {
                                     if (index !== currentIndex) {
                                         navigate(route.path);
-                                        window.location.reload();
+                                        // window.location.reload();
                                     }
                                 }}
                             >
@@ -201,7 +201,7 @@ export const Navbar = () => {
                                     e.preventDefault();
                                     if (index !== currentIndex) {
                                         navigate(route.path);
-                                        window.location.reload();
+                                        // window.location.reload();
                                     }
                                     toggleMobileMenu();
                                 }}

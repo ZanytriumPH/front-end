@@ -1,20 +1,20 @@
 // src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { motion } from 'framer-motion';
 import { Layout } from "./components/Layout.jsx";
 import { Hero } from "./components/sections/Hero.jsx";
 import { ActivityList } from "./components/sections/ActivityList.jsx";
 import { Mine } from "./components/sections/Mine.jsx";
 import { RouteSwitchButtons } from './components/elements/RouteSwitchButtons.jsx';
-import { ActivityDetail } from './components/sections/ActivityDetail.jsx'; // 新增导入
+import { ActivityDetail } from './components/sections/ActivityDetail.jsx';
 
 function App() {
     return (
         <Router>
             <Layout title="无界律动">
                 <div className="router-view">
-                    <AnimatedRoutes /> {/* 使用动画路由组件 */}
+                    <AnimatedRoutes />
                 </div>
                 <RouteSwitchButtons />
             </Layout>
@@ -24,23 +24,83 @@ function App() {
 
 // 创建一个包装组件来处理动画
 const AnimatedRoutes = () => {
-    const location = useLocation(); // 获取当前路由位置
+    const location = useLocation();
+
+    const pageVariants = {
+        initial: { opacity: 0, y: 10 },
+        in: { opacity: 1, y: 0 },
+        out: { opacity: 0, y: -10 }
+    };
+
+    const pageTransition = {
+        type: 'tween',
+        ease: 'anticipate',
+        duration: 0.3
+    };
 
     return (
-        <TransitionGroup>
-            <CSSTransition
-                key={location.key} // 使用路由的唯一key
-                timeout={300}
-                classNames="fade"
-            >
-                <Routes location={location}>
-                    <Route path="/" element={<Hero />} />
-                    <Route path="/ActivityList" element={<ActivityList />} />
-                    <Route path="/Mine" element={<Mine />} />
-                    <Route path="/ActivityDetail/:id" element={<ActivityDetail />} /> {/* 新增路由 */}
-                </Routes>
-            </CSSTransition>
-        </TransitionGroup>
+        <Routes location={location}>
+            <Route
+                path="/"
+                element={
+                    <motion.div
+                        key={location.pathname}
+                        initial="initial"
+                        animate="in"
+                        exit="out"
+                        variants={pageVariants}
+                        transition={pageTransition}
+                    >
+                        <Hero />
+                    </motion.div>
+                }
+            />
+            <Route
+                path="/ActivityList"
+                element={
+                    <motion.div
+                        key={location.pathname}
+                        initial="initial"
+                        animate="in"
+                        exit="out"
+                        variants={pageVariants}
+                        transition={pageTransition}
+                    >
+                        <ActivityList />
+                    </motion.div>
+                }
+            />
+            <Route
+                path="/Mine"
+                element={
+                    <motion.div
+                        key={location.pathname}
+                        initial="initial"
+                        animate="in"
+                        exit="out"
+                        variants={pageVariants}
+                        transition={pageTransition}
+                    >
+                        <Mine />
+                    </motion.div>
+                }
+            />
+            <Route
+                path="/ActivityDetail/:id"
+                element={
+                    <motion.div
+                        key={location.pathname}
+                        initial="initial"
+                        animate="in"
+                        exit="out"
+                        variants={pageVariants}
+                        transition={pageTransition}
+                    >
+                        <ActivityDetail />
+                    </motion.div>
+                }
+            />
+        </Routes>
     );
 };
 
