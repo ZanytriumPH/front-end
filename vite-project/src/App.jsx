@@ -3,12 +3,12 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Layout } from "./components/Layout.jsx";
-import { Hero } from "./components/sections/Hero.jsx";
-import { ActivityList } from "./components/sections/ActivityList.jsx";
-import { Mine } from "./components/sections/Mine.jsx";
+import { Hero } from "./components/pages/Hero.jsx";
+import { ActivityList } from "./components/pages/ActivityList.jsx";
+import { Mine } from "./components/pages/Mine.jsx";
 import { RouteSwitchButtons } from './components/elements/RouteSwitchButtons.jsx';
-import { ActivityDetail } from './components/sections/ActivityDetail.jsx';
-import {MyRegisteredDetail} from "./components/sections/MyRegisteredDetail.jsx";
+import { ActivityDetail } from './components/pages/ActivityDetail.jsx';
+import {MyRegisteredDetail} from "./components/pages/MyRegisteredDetail.jsx";
 
 function App() {
     return (
