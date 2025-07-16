@@ -31,21 +31,25 @@ export const MyRegistered = () => {
     return (
         <div>
             <h2 className="text-heading-1 text-3xl font-bold mb-8">我的报名</h2>
-            <div className="grid grid-cols-2 gap-6 md:grid-cols-3">
-                {registeredActivities.map((activity, index) => (
-                    <MyRegisteredCard
-                        key={index}
-                        id={activity.id}
-                        title={activity.title}
-                        time={activity.time}
-                        location={activity.location}
-                        price={activity.price}
-                        image={activity.image}
-                        signedUp={activity.signedUp}
-                        total={activity.total}
-                    />
-                ))}
-            </div>
+            {registeredActivities.length === 0 ? (
+                <p className="text-heading-3 text-center">暂无数据</p>
+            ) : (
+                <div className="grid grid-cols-2 gap-6 md:grid-cols-2 lg:grid-cols-3 mb-8">
+                    {registeredActivities.map((activity, index) => (
+                        <MyRegisteredCard
+                            key={index}
+                            id={activity.id}
+                            title={activity.title}
+                            time={activity.time}
+                            location={activity.location}
+                            price={activity.price}
+                            image={activity.image}
+                            signedUp={activity.signedUp}
+                            total={activity.total}
+                        />
+                    ))}
+                </div>
+            )}
         </div>
     );
 };

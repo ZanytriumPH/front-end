@@ -19,7 +19,7 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
             try {
                 const response = await fetch(`/api/activities/${id}`);
                 const result = await response.json();
-                console.log('服务器返回的活动详情数据:', result);
+                // console.log('服务器返回的活动详情数据:', result);
                 if (result.success && result.data) {
                     setActivity(result.data);
 
@@ -90,7 +90,6 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
         }
     };
 
-    // 根据主题状态设置背景色
     const backgroundColorClass = theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-gray-800';
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm transition-opacity duration-300">
