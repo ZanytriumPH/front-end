@@ -2,7 +2,7 @@
 import { BaseActivity } from '../shared/BaseActivity.jsx';
 import { useNavigate } from 'react-router-dom';
 
-export const ActivityCard = ({ title, time, location, price = '¥0', id, image, signedUp = 0, total = 0 }) => {
+export const ActivityCard = ({ title, time, location, price = '0', id, image, signedUp = 0, total = 0 }) => {
     const navigate = useNavigate();
 
     const handleSignUp = (e) => {

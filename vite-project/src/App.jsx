@@ -8,6 +8,7 @@ import { ActivityList } from "./components/sections/ActivityList.jsx";
 import { Mine } from "./components/sections/Mine.jsx";
 import { RouteSwitchButtons } from './components/elements/RouteSwitchButtons.jsx';
 import { ActivityDetail } from './components/sections/ActivityDetail.jsx';
+import {MyRegisteredDetail} from "./components/sections/MyRegisteredDetail.jsx";
 
 function App() {
     return (
@@ -89,6 +90,10 @@ const AnimatedRoutes = () => {
             <Route
                 path="/ActivityDetail/:id"
                 element={<ActivityDetail />}
+            />
+            <Route
+                path="/MyRegisteredDetail/:id"
+                element={<MyRegisteredDetail />}
             />
         </Routes>
     );

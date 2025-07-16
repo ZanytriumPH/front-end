@@ -29,7 +29,7 @@ export const BaseActivity = ({
                 {/* 添加图片显示 */}
                 {image && <img src={image} alt={title} className="w-full h-48 object-cover rounded-lg mb-4" />}
                 <div className="absolute top-4 right-4 text-red-500 font-bold text-3xl bg-price p-1 rounded">
-                    {price}
+                    <span className="text-2xl align-top">¥</span>{price}
                 </div>
                 <h3 className="text-heading-2 text-xl font-bold mb-2">{title}</h3>
                 <p className="text-heading-3 mb-2">
