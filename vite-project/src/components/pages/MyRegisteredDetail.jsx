@@ -1,11 +1,44 @@
-// src/components/sections/MyRegisteredDetail.jsx
+// src/components/pages/MyRegisteredDetail.jsx
 import React, { useState, useEffect } from 'react';
 import { BaseActivityDetail } from '../shared/BaseActivityDetail.jsx';
 import { useParams } from 'react-router-dom';
 
-const handleCancelRegistration = (e) => {
+const handleCancelRegistration = async (e, id) => {
     e.preventDefault();
-    // 可以在这里添加取消报名逻辑
+    const userName = localStorage.getItem('username');
+
+    if (!userName) {
+        console.error('请先登录');
+        return;
+    }
+
+    try {
+        const response = await fetch(`/api/activities/${id}/register`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ userName }),
+        });
+        const result = await response.json();
+
+        if (result.success) {
+            console.log('取消报名成功');
+            // 更新本地存储的余额
+            const activityResponse = await fetch(`/api/activities/${id}`);
+            const activityResult = await activityResponse.json();
+            if (activityResult.success && activityResult.data) {
+                const price = parseFloat(activityResult.data.price);
+                const storedBalance = parseFloat(localStorage.getItem('balance'));
+                localStorage.setItem('balance', (storedBalance + price).toString());
+            }
+            window.history.back(); // 返回上一页
+        } else {
+            console.error('取消报名失败:', result.message);
+        }
+    } catch (error) {
+        console.error('取消报名失败:', error);
+    }
 };
 
 export const MyRegisteredDetail = () => {
@@ -42,7 +75,7 @@ export const MyRegisteredDetail = () => {
             signedUp={signedUp}
             total={total}
             buttonText="确认取消报名"
-            onButtonClick={handleCancelRegistration}
+            onButtonClick={(e) => handleCancelRegistration(e, id)}
         />
     );
 };
