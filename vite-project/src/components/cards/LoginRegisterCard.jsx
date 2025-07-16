@@ -94,11 +94,9 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
                 let userData;
 
                 if (isLogin) {
-                    console.log('即将发送登录请求，用户名:', username, '密码:', password); // 检查登录请求参数
                     response = await axios.post('/api/login', { username, password });
                     userData = response.data.data;
                 } else {
-                    console.log('即将发送注册请求，用户名:', username, '密码:', password); // 检查注册请求参数
                     response = await axios.post('/api/register', { username, password });
                     userData = response.data.data;
                 }
@@ -120,7 +118,6 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
 
                     setTimeout(() => {
                         onClose();
-
                         // 刷新页面
                         window.location.reload();
                     }, 1500);
@@ -133,7 +130,6 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
                     });
                 }
             } catch (error) {
-                console.error('请求失败：', error.response ? error.response.data.message : '网络错误');
                 setNotification({
                     message: error.response ? error.response.data.message : '网络错误',
                     visible: true,

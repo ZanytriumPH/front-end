@@ -8,7 +8,8 @@ import { ActivityList } from "./components/pages/ActivityList.jsx";
 import { Mine } from "./components/pages/Mine.jsx";
 import { RouteSwitchButtons } from './components/elements/RouteSwitchButtons.jsx';
 import { ActivityDetail } from './components/pages/ActivityDetail.jsx';
-import {MyRegisteredDetail} from "./components/pages/MyRegisteredDetail.jsx";
+import { MyRegisteredDetail } from "./components/pages/MyRegisteredDetail.jsx";
+import { CreateActivity } from "./components/pages/CreateActivity.jsx";
 
 function App() {
     return (
@@ -94,6 +95,10 @@ const AnimatedRoutes = () => {
             <Route
                 path="/MyRegisteredDetail/:id"
                 element={<MyRegisteredDetail />}
+            />
+            <Route
+                path="/CreateActivity"
+                element={<CreateActivity />}
             />
         </Routes>
     );
