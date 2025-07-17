@@ -18,7 +18,12 @@ export const ActivityDetail = () => {
                 const response = await fetch(`/api/activities/${id}`);
                 const result = await response.json();
                 if (result.success && result.data) {
-                    setActivity(result.data);
+                    // 构建完整的图片 URL
+                    const imageUrl = result.data.image
+                        ? `http://127.0.0.1:7001/api/activities/images/${result.data.image}`
+                        : '';
+                    const activityWithImageUrl = { ...result.data, image: imageUrl };
+                    setActivity(activityWithImageUrl);
                     setSignedUp(result.data.signedUp);
                     setTotal(result.data.total);
                 } else {
@@ -95,6 +100,7 @@ export const ActivityDetail = () => {
                     total={total}
                     buttonText="确认活动报名"
                     onButtonClick={handleSignUp}
+                    activity={activity} // 传递处理好的 activity 对象
                 />
             )}
         </div>

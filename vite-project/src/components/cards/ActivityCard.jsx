@@ -1,13 +1,18 @@
 // src/components/cards/ActivityCard.jsx
-import { BaseActivity } from '../shared/BaseActivity.jsx';
-import { useNavigate } from 'react-router-dom';
+import {BaseActivity} from "../shared/BaseActivity.jsx";
+import {useNavigate} from "react-router-dom";
 
 export const ActivityCard = ({ title, time, location, price = '0', id, image, signedUp = 0, total = 0 }) => {
     const navigate = useNavigate();
 
+    // 直接构建图片URL
+    const imageUrl = image
+        ? `http://127.0.0.1:7001/api/activities/images/${image}`
+        : '';
+
     const handleSignUp = (e) => {
         e.preventDefault();
-        navigate(`/ActivityDetail/${id}`); // 导航到活动详情页
+        navigate(`/ActivityDetail/${id}`);
     };
 
     return (
@@ -17,7 +22,7 @@ export const ActivityCard = ({ title, time, location, price = '0', id, image, si
             location={location}
             price={price}
             id={id}
-            image={image}
+            image={imageUrl} // 直接使用URL
             signedUp={signedUp}
             total={total}
             buttonText="去报名"

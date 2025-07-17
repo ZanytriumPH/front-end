@@ -14,6 +14,7 @@ export const ActivityList = () => {
                 const response = await fetch('/api/activities');
                 const result = await response.json(); // 将变量名改为 result 以避免混淆
                 if (result.success && Array.isArray(result.data)) {
+                    console.log('获取的数据:', result.data);
                     setActivities(result.data);
                     setSearchResults(result.data);
                 } else {

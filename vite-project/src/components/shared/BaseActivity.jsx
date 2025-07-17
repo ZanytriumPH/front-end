@@ -3,17 +3,17 @@ import React from 'react';
 import { BtnLink } from './BtnLink.jsx';
 
 export const BaseActivity = ({
-                                     title,
-                                     time,
-                                     location,
-                                     price = '¥0',
-                                     id,
-                                     image,
-                                     signedUp = 0,
-                                     total = 0,
-                                     buttonText,
-                                     onButtonClick
-                                 }) => {
+                                 title,
+                                 time,
+                                 location,
+                                 price = '¥0',
+                                 id,
+                                 image,
+                                 signedUp = 0,
+                                 total = 0,
+                                 buttonText,
+                                 onButtonClick
+                             }) => {
 
     const handleViewDetails = (e) => {
         e.preventDefault();
@@ -27,7 +27,13 @@ export const BaseActivity = ({
         <div className={'bg-gradient-to-r from-blue-600 to-violet-600 p-1 rounded-3xl'}>
             <div className="bg-box-bg p-6 relative rounded-3xl">
                 {/* 添加图片显示 */}
-                {image && <img src={image} alt={title} className="w-full h-48 object-cover rounded-lg mb-4" />}
+                {image ? (
+                    <img src={image} alt={title} className="w-full h-48 object-cover rounded-lg mb-4" />
+                ) : (
+                    <div className="w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                        <span className="text-gray-500">加载中...</span>
+                    </div>
+                )}
                 <div className="absolute top-4 right-4 text-red-500 font-bold text-3xl bg-price p-1 rounded">
                     <span className="text-2xl align-top">¥</span>{price}
                 </div>

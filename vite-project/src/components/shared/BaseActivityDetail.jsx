@@ -21,7 +21,13 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
                 const result = await response.json();
                 // console.log('服务器返回的活动详情数据:', result);
                 if (result.success && result.data) {
-                    setActivity(result.data);
+                    const imageUrl = result.data.image
+                        ? `http://127.0.0.1:7001/api/activities/images/${result.data.image}`
+                        : '';
+                    const activityWithImageUrl = { ...result.data, image: imageUrl };
+
+                    setActivity(activityWithImageUrl);
+                    // setActivity(result.data);
 
                     const formattedComments = (result.data.comments || []).map(comment => ({
                         ...comment,
@@ -91,6 +97,7 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
     };
 
     const backgroundColorClass = theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-gray-800';
+
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm transition-opacity duration-300">
             <div className={`${backgroundColorClass} rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col`}>
