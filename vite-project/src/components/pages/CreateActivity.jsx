@@ -65,84 +65,84 @@ export const CreateActivity = () => {
 
     return (
         <div className="py-20">
-            <div className="max-w-2xl mx-auto p-6 bg-white rounded-md shadow-md">
+            <div className="max-w-2xl mx-auto p-6 bg-box-bg rounded-md shadow-md">
                 <h2 className="text-heading-1 text-3xl sm:text-4xl md:text-5xl font-bold mb-8">创建活动</h2>
                 <Notification message={notification.message} visible={notification.visible} type={notification.type} />
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
-                        <label htmlFor="title" className="block text-sm font-medium text-gray-700">活动标题</label>
+                        <label htmlFor="title" className="block text-heading-2">活动标题</label>
                         <input
                             type="text"
                             id="title"
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-violet-500 focus:border-violet-500 sm:text-sm"
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-violet-500 focus:border-violet-500 text-heading-3 text-sm"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                         />
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="time" className="block text-sm font-medium text-gray-700">活动时间</label>
+                        <label htmlFor="time" className="block text-heading-2">活动时间</label>
                         <input
                             type="text"
                             id="time"
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-violet-500 focus:border-violet-500 sm:text-sm"
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-violet-500 focus:border-violet-500 text-heading-3 text-sm"
                             value={time}
                             onChange={(e) => setTime(e.target.value)}
                         />
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="location" className="block text-sm font-medium text-gray-700">活动地点</label>
+                        <label htmlFor="location" className="block text-heading-2">活动地点</label>
                         <input
                             type="text"
                             id="location"
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-violet-500 focus:border-violet-500 sm:text-sm"
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-violet-500 focus:border-violet-500 text-heading-3 text-sm"
                             value={location}
                             onChange={(e) => setLocation(e.target.value)}
                         />
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="price" className="block text-sm font-medium text-gray-700">活动价格</label>
+                        <label htmlFor="price" className="block text-heading-2">活动价格</label>
                         <input
                             type="text"
                             id="price"
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-violet-500 focus:border-violet-500 sm:text-sm"
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-violet-500 focus:border-violet-500 text-heading-3 text-sm"
                             value={price}
                             onChange={(e) => setPrice(e.target.value)}
                         />
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="image" className="block text-sm font-medium text-gray-700">活动图片</label>
+                        <label htmlFor="image" className="block text-heading-2">活动图片</label>
                         <input
                             type="file"
                             id="image"
-                            className="mt-1 block w-full"
+                            className="mt-1 block w-full text-heading-3 text-sm"
                             onChange={handleImageChange}
                         />
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="total" className="block text-sm font-medium text-gray-700">活动总人数</label>
+                        <label htmlFor="total" className="block text-heading-2">活动总人数</label>
                         <input
                             type="number"
                             id="total"
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-violet-500 focus:border-violet-500 sm:text-sm"
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-violet-500 focus:border-violet-500 text-heading-3 text-sm"
                             value={total}
                             onChange={(e) => setTotal(e.target.value)}
                         />
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="description" className="block text-sm font-medium text-gray-700">活动描述</label>
+                        <label htmlFor="description" className="block text-heading-2">活动描述</label>
                         <textarea
                             id="description"
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-violet-500 focus:border-violet-500 sm:text-sm"
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-violet-500 focus:border-violet-500 text-heading-3 text-sm"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         />
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="contact" className="block text-sm font-medium text-gray-700">联系方式</label>
+                        <label htmlFor="contact" className="block text-heading-2">联系方式</label>
                         <input
                             type="text"
                             id="contact"
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-violet-500 focus:border-violet-500 sm:text-sm"
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-violet-500 focus:border-violet-500 text-heading-3 text-sm"
                             value={contact}
                             onChange={(e) => setContact(e.target.value)}
                         />
