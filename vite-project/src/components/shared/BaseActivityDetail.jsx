@@ -121,7 +121,7 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
                         <img
                             src={activity?.image || 'default-image.jpg'}
                             alt="Activity"
-                            className="w-full h-72 object-cover"
+                            className="w-full h-102 object-cover"
                         />
                     </div>
 
