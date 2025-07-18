@@ -10,6 +10,7 @@ import { RouteSwitchButtons } from './components/elements/RouteSwitchButtons.jsx
 import { ActivityDetail } from './components/pages/ActivityDetail.jsx';
 import { MyRegisteredDetail } from "./components/pages/MyRegisteredDetail.jsx";
 import { CreateActivity } from "./components/pages/CreateActivity.jsx";
+import {MyLaunchDetail} from "./components/pages/MyLaunchDetail.jsx";
 
 function App() {
     return (
@@ -99,6 +100,10 @@ const AnimatedRoutes = () => {
             <Route
                 path="/CreateActivity"
                 element={<CreateActivity />}
+            />
+            <Route
+                path="/MyPublishedDetail"
+                element={<MyLaunchDetail />}
             />
         </Routes>
     );
