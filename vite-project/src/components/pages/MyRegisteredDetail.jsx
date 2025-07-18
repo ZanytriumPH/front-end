@@ -61,8 +61,8 @@ export const MyRegisteredDetail = () => {
                     localStorage.setItem('balance', (storedBalance + price).toString());
                 }
                 setTimeout(() => {
-                    window.history.back(); // 返回上一页
-                }, 2000); // 延迟 2 秒后返回上一页
+                    window.history.back();
+                }, 2000);
             } else {
                 setNotification({ message: result.message, visible: true, type: 'error' }); // 更新通知状态
             }

@@ -27,7 +27,6 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
                     const activityWithImageUrl = { ...result.data, image: imageUrl };
 
                     setActivity(activityWithImageUrl);
-                    // setActivity(result.data);
 
                     const formattedComments = (result.data.comments || []).map(comment => ({
                         ...comment,
@@ -273,5 +272,3 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
         </div>
     );
 };
-
-export default BaseActivityDetail;
