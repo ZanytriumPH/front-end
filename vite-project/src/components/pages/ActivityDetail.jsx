@@ -37,9 +37,6 @@ export const ActivityDetail = () => {
                     const storedBalance = parseFloat(localStorage.getItem('balance'));
                     localStorage.setItem('balance', (storedBalance - price).toString());
                 }
-                setTimeout(() => {
-                    window.history.back();
-                }, 2000);
             } else {
                 setNotification({ message: result.message, visible: true, type: 'error' }); // 更新通知状态
             }
