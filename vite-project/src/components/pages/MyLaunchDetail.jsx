@@ -41,6 +41,10 @@ export const MyLaunchDetail = () => {
         }
 
         try {
+            // 不得不把这两句放在这里，在活动删除前获取数据
+            const activityResponse = await fetch(`/api/activities/${id}`);
+            const activityResult = await activityResponse.json();
+
             const response = await fetch(`/api/activities/${id}`, {
                 method: 'DELETE',
                 headers: {
@@ -52,6 +56,13 @@ export const MyLaunchDetail = () => {
 
             if (result.success) {
                 setNotification({ message: '活动删除成功', visible: true, type: 'success' });
+                // 更新本地存储的余额
+                if (activityResult.success && activityResult.data) {
+                    const price = parseFloat(activityResult.data.price);
+                    const signedUp = parseInt(activityResult.data.signedUp);
+                    const storedBalance = parseFloat(localStorage.getItem('balance'));
+                    localStorage.setItem('balance', (storedBalance - signedUp  * price).toString());
+                }
                 setTimeout(() => {
                     window.history.back();
                 }, 2000);
