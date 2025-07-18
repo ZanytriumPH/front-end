@@ -25,6 +25,13 @@ export const CreateActivity = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const userName = localStorage.getItem('username');
+
+        if (!userName) {
+            setNotification({ message: '请先登录', visible: true, type: 'error' }); // 更新通知状态
+            return;
+        }
+
         // 简单验证
         if (!title || !time || !location || !price || !image || !total || !description || !contact) {
             setNotification({ message: '所有字段均为必填项', visible: true, type: 'error' });

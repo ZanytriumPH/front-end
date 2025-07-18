@@ -19,7 +19,7 @@ function App() {
                 <div className="router-view">
                     <AnimatedRoutes />
                 </div>
-                <RouteSwitchButtons />
+                    <RouteSwitchButtons />
             </Layout>
         </Router>
     );
@@ -102,7 +102,7 @@ const AnimatedRoutes = () => {
                 element={<CreateActivity />}
             />
             <Route
-                path="/MyPublishedDetail"
+                path="/MyLaunchDetail/:id"
                 element={<MyLaunchDetail />}
             />
         </Routes>

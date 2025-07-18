@@ -9,7 +9,7 @@ export const ActivityDetail = () => {
     const [activity, setActivity] = useState(null);
     const [signedUp, setSignedUp] = useState(0);
     const [total, setTotal] = useState(0);
-    const [username] = useState(localStorage.getItem('username') || '用户');
+    // const [username] = useState(localStorage.getItem('username') || '用户');
     const [notification, setNotification] = useState({ message: '', visible: false, type: 'success' }); // 添加通知状态
 
     useEffect(() => {

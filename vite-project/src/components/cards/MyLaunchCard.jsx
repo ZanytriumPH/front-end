@@ -12,7 +12,7 @@ export const MyLaunchCard = ({ title, time, location, price = '¥0', id, image, 
 
     const handleCancelLaunch = (e) => {
         e.preventDefault();
-        navigate(`/MyLaunchedDetail/${id}`); // 导航到报名的活动详情页
+        navigate(`/MyLaunchDetail/${id}`); // 导航到报名的活动详情页
     };
 
     return (
