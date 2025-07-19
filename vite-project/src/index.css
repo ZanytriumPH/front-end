@@ -1,5 +1,4 @@
 /* src/index.css */
-/* @符号在 CSS 中用于标识特殊指令 */
 @import "tailwindcss";
 
 @theme {
@@ -115,7 +114,6 @@ body {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* src/index.css */
 .transition-navbar {
   transition: background-color 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
 }
