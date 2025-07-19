@@ -1,4 +1,4 @@
-// src/components/sections/ActivityList.jsx
+// src/components/pages/ActivityList.jsx
 import React, {useEffect, useState} from 'react';
 import { Container } from '../shared/Container.jsx';
 import {ActivityCard} from "../cards/ActivityCard.jsx";

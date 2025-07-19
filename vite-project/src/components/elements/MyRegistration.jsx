@@ -1,8 +1,8 @@
-// src/components/elements/MyRegistered.jsx
+// src/components/elements/MyRegistration.jsx
 import { MyRegisteredCard } from '../cards/MyRegisteredCard.jsx';
 import React, { useEffect, useState } from 'react';
 
-export const MyRegistered = () => {
+export const MyRegistration = () => {
     const [registeredActivities, setRegisteredActivities] = useState([]);
 
     useEffect(() => {

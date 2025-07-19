@@ -1,12 +1,10 @@
 // src/components/cards/LoginRegisterCard.jsx
 import React, { useState, useEffect } from 'react';
-import { useThemeStore } from '../../store/ThemeStore.jsx';
 import axios from 'axios';
 import { FormInput } from '../shared/FormInput.jsx';
 import { Notification } from '../shared/Notification.jsx';
 
 export const LoginRegisterCard = ({ isOpen, onClose }) => {
-    const { theme } = useThemeStore();
     const [isLogin, setIsLogin] = useState(true);
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -30,7 +28,7 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
         setConfirmPassword('');
         setPasswordError('');
         setConfirmError('');
-        setUsernameError(''); // 切换表单时清空用户名错误
+        setUsernameError('');
     };
 
     const handlePasswordChange = (e) => {
@@ -110,7 +108,7 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
                     });
 
                     // 确保从响应中获取余额
-                    const balance = userData?.balance || null ; // 调试日志
+                    const balance = userData?.balance || null ;
 
                     // 登录成功后存储用户名和余额
                     localStorage.setItem('username', username);
@@ -146,23 +144,13 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
             <Notification message={notification.message} visible={notification.visible} type={notification.type} />
             <div className="fixed inset-0 z-40 flex items-center justify-center bg-transparent">
                 <div className={`bg-box-bg p-12 rounded-lg border-4 relative w-96 border-gradient-to-r`}>
+                    {/*关闭按钮*/}
                     <button
                         className="absolute top-4 right-4 text-heading-2 cursor-pointer"
                         onClick={onClose}
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="w-6 h-6"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M6 18L18 6M6 6l12 12"
-                            />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/>
                         </svg>
                     </button>
                     <h2 className="text-heading-1 text-3xl font-bold mb-6">

@@ -2,9 +2,9 @@
 import React from 'react';
 import { Container } from '../shared/Container.jsx';
 import logo from '../../assets/logo.png'; // 导入logo图片
-import WeChatIcon from '../../assets/Footer/WeChat.png';
-import QQIcon from '../../assets/Footer/QQ.png';
-import TikTokIcon from '../../assets/Footer/TikTok.png';
+import WeChatIcon from '../../assets/footer/WeChat.png';
+import QQIcon from '../../assets/footer/QQ.png';
+import TikTokIcon from '../../assets/footer/TikTok.png';
 
 const socialLinks = [
     {

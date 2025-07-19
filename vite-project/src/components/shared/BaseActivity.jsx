@@ -1,4 +1,4 @@
-// src/components/cards/BaseActivity.jsx
+
 import React from 'react';
 import { BtnLink } from './BtnLink.jsx';
 

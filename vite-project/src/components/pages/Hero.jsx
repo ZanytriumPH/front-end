@@ -1,4 +1,4 @@
-// src/components/sections/Hero.jsx
+// src/components/pages/Hero.jsx
 import { Container } from "../shared/Container.jsx";
 import { Paragraph } from "../shared/Paragraph.jsx";
 import HeroImg from "../../assets/HeroImg.png";
