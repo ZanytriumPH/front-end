@@ -1,8 +1,9 @@
 // src/components/cards/LoginRegisterCard.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { FormInput } from '../shared/FormInput.jsx';
 import { Notification } from '../shared/Notification.jsx';
+import {useNotificationTimer} from "../../hooks/useNotificationTimer.js";
 
 export const LoginRegisterCard = ({ isOpen, onClose }) => {
     const [isLogin, setIsLogin] = useState(true);
@@ -13,14 +14,7 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
     const [notification, setNotification] = useState({ message: '', visible: false, type: 'success' });
     const [usernameError, setUsernameError] = useState(''); // 新增用户名错误状态
 
-    useEffect(() => {
-        if (notification.visible) {
-            const timer = setTimeout(() => {
-                setNotification(prev => ({ ...prev, visible: false }));
-            }, 2000);
-            return () => clearTimeout(timer);
-        }
-    }, [notification.visible]);
+    useNotificationTimer(notification, setNotification);
 
     const toggleForm = () => {
         setIsLogin(!isLogin);

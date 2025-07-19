@@ -19,7 +19,7 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
             try {
                 const response = await fetch(`/api/activities/${id}`);
                 const result = await response.json();
-                // console.log('服务器返回的活动详情数据:', result);
+                console.log('服务器返回的活动详情数据:', result);
                 if (result.success && result.data) {
                     const imageUrl = result.data.image
                         ? `http://127.0.0.1:7001/api/activities/images/${result.data.image}`

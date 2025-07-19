@@ -34,9 +34,8 @@ export const RouteSwitchButtons = () => {
         }
     };
 
-    // 判断当前路由是否为 ActivityDetail 界面
+    // 判断当前路由是否为 ActivityDetail 界面，若是则不显示按钮
     const isActivityDetail = location.pathname.includes('/ActivityDetail/');
-
     if (isActivityDetail) {
         return null;
     }

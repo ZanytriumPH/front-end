@@ -6,7 +6,7 @@ export const BaseActivity = ({
                                  title,
                                  time,
                                  location,
-                                 price = '¥0',
+                                 price = '0', // ￥符号另外显示
                                  id,
                                  image,
                                  signedUp = 0,
