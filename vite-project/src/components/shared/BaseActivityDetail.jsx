@@ -4,6 +4,8 @@ import {useThemeStore} from "../../store/ThemeStore.jsx";
 import {formatDate} from "../../utils/dateUtils.js";
 import {CommentItem} from "./CommentItem.jsx";
 import {CommentForm} from "./CommentForm.jsx";
+import { useNotificationTimer } from '../../hooks/useNotificationTimer.js';
+import {Notification} from "./Notification.jsx";
 
 export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, buttonText, onButtonClick }) => {
     if (!isOpen) return null;
@@ -13,6 +15,7 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
     const [username] = useState(localStorage.getItem('username') || '用户');
+    const [notification, setNotification] = useState({ message: '', visible: false, type: 'error' });
 
     useEffect(() => {
         const fetchActivityDetail = async () => {
@@ -49,6 +52,10 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
 
     const handleCommentSubmit = async (e) => {
         e.preventDefault();
+        if (!localStorage.getItem('username')) {
+            setNotification({ message: '请先登录', visible: true, type: 'error' });
+            return;
+        }
         if (newComment.trim()) {
             try {
                 const currentDate = new Date();
@@ -97,8 +104,11 @@ export const BaseActivityDetail = ({ isOpen, onClose, id, signedUp, total, butto
 
     const backgroundColorClass = theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-gray-800';
 
+    useNotificationTimer(notification, setNotification);
+
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm transition-opacity duration-300">
+            <Notification message={notification.message} visible={notification.visible} type={notification.type} /> {/* 渲染 Notification 组件 */}
             <div className={`${backgroundColorClass} rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col`}>
                 {/* 顶部标题栏 */}
                 <div className="flex justify-between items-center p-5 bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
