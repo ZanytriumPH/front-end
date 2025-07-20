@@ -4,7 +4,8 @@ import { Notification } from '../shared/Notification.jsx';
 
 export const CreateActivity = () => {
     const [title, setTitle] = useState('');
-    const [time, setTime] = useState('');
+    const [date, setDate] = useState(''); // 日期部分
+    const [time, setTime] = useState(''); // 时间部分
     const [location, setLocation] = useState('');
     const [price, setPrice] = useState('');
     const [image, setImage] = useState(null);
@@ -32,15 +33,18 @@ export const CreateActivity = () => {
             return;
         }
 
+        // 组合日期和时间
+        const fullDateTime = date && time ? `${date} ${time}` : '';
+
         // 简单验证
-        if (!title || !time || !location || !price || !image || !total || !description || !contact) {
+        if (!title || !date || !time || !location || !price || !image || !total || !description || !contact) {
             setNotification({ message: '所有字段均为必填项', visible: true, type: 'error' });
             return;
         }
 
         const formData = new FormData();
         formData.append('title', title);
-        formData.append('time', time);
+        formData.append('time', fullDateTime);
         formData.append('location', location);
         formData.append('price', price);
         formData.append('image', image);
@@ -121,14 +125,25 @@ export const CreateActivity = () => {
                                 </svg>
                             </div>
                             <div className="flex-grow">
-                                <label htmlFor="time" className="block text-sm text-heading-2">活动时间</label>
-                                <input
-                                    type="datetime-local"
-                                    id="time"
-                                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-heading-3"
-                                    value={time}
-                                    onChange={(e) => setTime(e.target.value)}
-                                />
+                                <label className="block text-sm text-heading-2">活动时间</label>
+                                <div className="grid grid-cols-2 gap-3 mt-1">
+                                    <div>
+                                        <input
+                                            type="date"
+                                            className="block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-heading-3"
+                                            value={date}
+                                            onChange={(e) => setDate(e.target.value)}
+                                        />
+                                    </div>
+                                    <div>
+                                        <input
+                                            type="time"
+                                            className="block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-heading-3"
+                                            value={time}
+                                            onChange={(e) => setTime(e.target.value)}
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
