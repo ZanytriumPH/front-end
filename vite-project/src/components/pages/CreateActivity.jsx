@@ -28,7 +28,7 @@ export const CreateActivity = () => {
         const userName = localStorage.getItem('username');
 
         if (!userName) {
-            setNotification({ message: '请先登录', visible: true, type: 'error' }); // 更新通知状态
+            setNotification({ message: '请先登录', visible: true, type: 'error' });
             return;
         }
 
@@ -71,7 +71,7 @@ export const CreateActivity = () => {
     };
 
     const handleGoBack = () => {
-        navigate(-1); // 返回上一个路由
+        navigate(-1);
     };
 
     return (
@@ -94,7 +94,7 @@ export const CreateActivity = () => {
                 <div className="p-6 space-y-5">
                     <Notification message={notification.message} visible={notification.visible} type={notification.type} />
                     <form onSubmit={handleSubmit} className="space-y-5">
-                        {/* 活动标题 - 添加图标容器 */}
+                        {/* 活动标题 */}
                         <div className="flex items-center">
                             <div className="bg-gray-100 p-3 rounded-lg mr-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -113,27 +113,27 @@ export const CreateActivity = () => {
                             </div>
                         </div>
 
+                        {/* 活动时间 - 独占一行 */}
+                        <div className="flex items-center">
+                            <div className="bg-gray-100 p-3 rounded-lg mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div className="flex-grow">
+                                <label htmlFor="time" className="block text-sm text-heading-2">活动时间</label>
+                                <input
+                                    type="datetime-local"
+                                    id="time"
+                                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-heading-3"
+                                    value={time}
+                                    onChange={(e) => setTime(e.target.value)}
+                                />
+                            </div>
+                        </div>
+
                         {/* 网格布局信息卡片 */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                            {/* 活动时间 */}
-                            <div className="flex items-center">
-                                <div className="bg-gray-100 p-3 rounded-lg mr-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                </div>
-                                <div className="flex-grow">
-                                    <label htmlFor="time" className="block text-sm text-heading-2">活动时间</label>
-                                    <input
-                                        type="text"
-                                        id="time"
-                                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-heading-3"
-                                        value={time}
-                                        onChange={(e) => setTime(e.target.value)}
-                                    />
-                                </div>
-                            </div>
-
                             {/* 活动地点 */}
                             <div className="flex items-center">
                                 <div className="bg-gray-100 p-3 rounded-lg mr-3">
@@ -173,7 +173,7 @@ export const CreateActivity = () => {
                                 </div>
                             </div>
 
-                            {/* 活动人数 */}
+                            {/* 活动总人数 */}
                             <div className="flex items-center">
                                 <div className="bg-gray-100 p-3 rounded-lg mr-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -210,23 +210,23 @@ export const CreateActivity = () => {
                                     />
                                 </div>
                             </div>
+                        </div>
 
-                            {/* 活动图片 */}
-                            <div className="flex items-center md:col-span-2">
-                                <div className="bg-gray-100 p-3 rounded-lg mr-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
-                                </div>
-                                <div className="flex-grow">
-                                    <label htmlFor="image" className="block text-sm text-heading-2">活动图片</label>
-                                    <input
-                                        type="file"
-                                        id="image"
-                                        className="mt-1 block w-full text-heading-3 text-sm cursor-pointer border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                                        onChange={handleImageChange}
-                                    />
-                                </div>
+                        {/* 活动图片 - 独占一行 */}
+                        <div className="flex items-center">
+                            <div className="bg-gray-100 p-3 rounded-lg mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <div className="flex-grow">
+                                <label htmlFor="image" className="block text-sm text-heading-2">活动图片</label>
+                                <input
+                                    type="file"
+                                    id="image"
+                                    className="mt-1 block w-full text-heading-3 text-sm cursor-pointer border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                    onChange={handleImageChange}
+                                />
                             </div>
                         </div>
 
