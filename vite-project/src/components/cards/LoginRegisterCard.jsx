@@ -102,16 +102,23 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
                     });
 
                     // 确保从响应中获取余额
-                    const balance = userData?.balance || null ;
+                    const balance = userData?.balance || null;
 
                     // 登录成功后存储用户名和余额
                     localStorage.setItem('username', username);
                     localStorage.setItem('balance', balance);
 
+                    // 发送自定义事件
+                    const event = new CustomEvent('userLoggedIn', {
+                        detail: {
+                            username,
+                            balance
+                        }
+                    });
+                    window.dispatchEvent(event);
+
                     setTimeout(() => {
                         onClose();
-                        // 刷新页面
-                        window.location.reload();
                     }, 1500);
                 } else {
                     console.error(`${isLogin ? '登录' : '注册'}失败：`, response.data.message);

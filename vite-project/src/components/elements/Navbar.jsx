@@ -44,8 +44,18 @@ export const Navbar = () => {
         };
 
         window.addEventListener('scroll', handleScroll);
+
+        // 监听自定义事件
+        const handleUserLoggedIn = (event) => {
+            const { username, balance } = event.detail;
+            setUsername(username);
+            setBalance(balance);
+        };
+        window.addEventListener('userLoggedIn', handleUserLoggedIn);
+
         return () => {
             window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('userLoggedIn', handleUserLoggedIn);
         };
     }, []);
 

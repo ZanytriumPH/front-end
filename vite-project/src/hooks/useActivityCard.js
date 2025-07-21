@@ -18,3 +18,23 @@ export const useActivityCard = (id, path) => {
 
     return { getImageUrl, handleButtonClick };
 };
+
+// import { useNavigate } from 'react-router-dom';
+//
+// export const useActivityCard = (id, path) => {
+//     const navigate = useNavigate();
+//
+//     // 修改为直接返回静态文件路径
+//     const getImageUrl = (image) => {
+//         return image
+//             ? `/uploads/activities/${image}` // 直接使用静态文件服务路径
+//             : '';
+//     };
+//
+//     const handleButtonClick = (e) => {
+//         e.preventDefault();
+//         navigate(`${path}/${id}`);
+//     };
+//
+//     return { getImageUrl, handleButtonClick };
+// };
