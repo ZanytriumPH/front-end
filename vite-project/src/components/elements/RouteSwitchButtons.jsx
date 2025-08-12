@@ -8,11 +8,19 @@ const routes = [
     { path: '/Mine', name: '我的' }
 ];
 
+// 定义需要排除的路由路径数组
+const excludedRoutes = [
+    '/ActivityDetail/',
+    '/MyRegisteredDetail/',
+    '/MyLaunchDetail/',
+    '/CreateActivity'
+];
+
 export const RouteSwitchButtons = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [hoverLeft, setHoverLeft] = useState(false);
+    const [hoverLeft, setHoverLeft] = useState(false); // 用于控制左侧按钮的悬停效果
     const [hoverRight, setHoverRight] = useState(false);
 
     useEffect(() => {
@@ -34,10 +42,10 @@ export const RouteSwitchButtons = () => {
         }
     };
 
-    // 判断当前路由是否为 ActivityDetail 界面，若是则不显示按钮
-    const isActivityDetail = location.pathname.includes('/ActivityDetail/');
-    if (isActivityDetail) {
-        return null;
+    // 使用 some 方法检查当前路由是否匹配排除列表中的任何一个
+    const shouldHideButtons = excludedRoutes.some(route => location.pathname.includes(route));
+    if (shouldHideButtons) {
+        return null; // 隐藏按钮
     }
 
     return (
@@ -45,14 +53,14 @@ export const RouteSwitchButtons = () => {
             {/* 左侧按钮 - 固定在屏幕左侧垂直居中 */}
             <div
                 className={`fixed left-4 top-1/2 transform -translate-y-1/2 z-50 transition-all duration-300 ${
-                    currentIndex === 0 ? 'opacity-50 cursor-not-allowed' : 'opacity-100 cursor-pointer'
+                    currentIndex === 0 ? 'opacity-50 cursor-not-allowed' : 'opacity-100 cursor-pointer' // 首页时的按钮样式及箭头样式
                 }`}
                 onClick={handlePrevRoute}
                 onMouseEnter={() => setHoverLeft(true)}
                 onMouseLeave={() => setHoverLeft(false)}
             >
                 <div className={`absolute inset-0 bg-gradient-to-r from-blue-600 to-violet-600 rounded-full blur-md transition-all duration-300 ${
-                    hoverLeft ? 'opacity-70 scale-110' : 'opacity-0'
+                    hoverLeft ? 'opacity-70 scale-110' : 'opacity-0' // 鼠标悬停时周围多出的那一圈
                 }`}></div>
                 <div className="relative flex items-center justify-center bg-gradient-to-r from-blue-600 to-violet-600 text-white p-4 rounded-full shadow-2xl hover:shadow-violet-500/30 transition-all duration-300 transform hover:scale-105 w-16 h-16">
                     <svg

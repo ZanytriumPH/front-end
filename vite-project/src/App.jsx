@@ -6,20 +6,22 @@ import { Layout } from "./components/Layout.jsx";
 import { Hero } from "./components/pages/Hero.jsx";
 import { ActivityList } from "./components/pages/ActivityList.jsx";
 import { Mine } from "./components/pages/Mine.jsx";
-import { RouteSwitchButtons } from './components/elements/RouteSwitchButtons.jsx';
 import { ActivityDetail } from './components/pages/ActivityDetail.jsx';
 import { MyRegisteredDetail } from "./components/pages/MyRegisteredDetail.jsx";
 import { CreateActivity } from "./components/pages/CreateActivity.jsx";
-import {MyLaunchDetail} from "./components/pages/MyLaunchDetail.jsx";
+import { MyLaunchDetail } from "./components/pages/MyLaunchDetail.jsx";
 
 function App() {
     return (
         <Router>
             <Layout title="无界律动">
-                <div className="router-view">
-                    <AnimatedRoutes />
-                </div>
-                    <RouteSwitchButtons />
+                <AnimatedRoutes />
+
+                {/* 原写法，现已将按钮放置Layout中 */}
+                {/*<div className="router-view">*/}
+                    {/*<AnimatedRoutes />*/}
+                {/*</div>*/}
+                    {/*<RouteSwitchButtons /> /!* 和路由视图并列，无论路由如何切换，该组件都会被渲染 *!/*/}
             </Layout>
         </Router>
     );

@@ -3,28 +3,29 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { FormInput } from '../shared/FormInput.jsx';
 import { Notification } from '../shared/Notification.jsx';
-import {useNotificationTimer} from "../../hooks/useNotificationTimer.js";
+import { useNotificationTimer } from "../../hooks/useNotificationTimer.js";
 
 export const LoginRegisterCard = ({ isOpen, onClose }) => {
     const [isLogin, setIsLogin] = useState(true);
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [passwordError, setPasswordError] = useState('');
+    const [passwordError, setPasswordError] = useState(''); // 错误提示信息，错误时显示
     const [confirmError, setConfirmError] = useState('');
+    const [usernameError, setUsernameError] = useState('');
     const [notification, setNotification] = useState({ message: '', visible: false, type: 'success' });
-    const [usernameError, setUsernameError] = useState(''); // 新增用户名错误状态
 
     useNotificationTimer(notification, setNotification);
 
     const toggleForm = () => {
-        setIsLogin(!isLogin);
-        setPassword('');
+        setIsLogin(!isLogin); // 状态取反，切换表单
+        setPassword(''); // 清空内容
         setConfirmPassword('');
         setPasswordError('');
         setConfirmError('');
         setUsernameError('');
     };
 
+    // 动态监听输入改变
     const handlePasswordChange = (e) => {
         const newPassword = e.target.value;
         setPassword(newPassword);
@@ -161,7 +162,7 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
                         <FormInput
                             type="text"
                             placeholder="用户名"
-                            error={usernameError} // 显示用户名错误信息
+                            error={usernameError} // 输入框下显示错误提示
                         />
                         <FormInput
                             type="password"
@@ -170,7 +171,7 @@ export const LoginRegisterCard = ({ isOpen, onClose }) => {
                             onChange={handlePasswordChange}
                             error={passwordError}
                         />
-                        {!isLogin && (
+                        {!isLogin && ( // 注册时显示
                             <FormInput
                                 type="password"
                                 placeholder="确认密码"

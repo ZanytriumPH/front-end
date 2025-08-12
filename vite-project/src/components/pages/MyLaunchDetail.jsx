@@ -22,11 +22,11 @@ export const MyLaunchDetail = () => {
             const activityResult = await activityResponse.json();
 
             const response = await fetch(`/api/activities/${id}`, {
-                method: 'DELETE',
+                method: 'DELETE', // 指定请求方法为DELETE
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json', // 声明请求体格式为JSON
                 },
-                body: JSON.stringify({ userName }),
+                body: JSON.stringify({ userName }), // 发送的请求数据（需转为JSON字符串）
             });
             const result = await response.json();
 

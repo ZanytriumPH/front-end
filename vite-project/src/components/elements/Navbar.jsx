@@ -115,7 +115,6 @@ export const Navbar = () => {
                                 onClick={() => {
                                     if (index !== currentIndex) {
                                         navigate(route.path);
-                                        // window.location.reload();
                                     }
                                 }}
                             >
@@ -128,6 +127,7 @@ export const Navbar = () => {
 
                     {/* 登录/注册按钮和主题切换按钮 */}
                     <div className="min-w-max flex items-center gap-x-3">
+                        {/* 根据有无本地存储的用户名进行切换 */}
                         {username ? (
                             <>
                                 <span className="text-heading-2">{username}</span>
@@ -152,19 +152,8 @@ export const Navbar = () => {
                             className="outline-hidden border-2 flex relative text-heading-2 rounded-full p-1 lg:p-1 border-box-border cursor-pointer"
                         >
                             {theme === "dark" ? (
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth="1.5"
-                                    stroke="currentColor"
-                                    className="w-6 h-6"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998z"
-                                    />
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998z"/>
                                 </svg>
                             ) : (
                                 <svg

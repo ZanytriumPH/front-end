@@ -39,7 +39,7 @@ export const Footer = () => {
                         </div>
                     </div>
                     <p className="text-heading-3 mb-4 md:mb-0">
-                        &copy; {new Date().getFullYear()} 无界律动. 保留所有权利.
+                        &copy; {new Date().getFullYear()} 无界律动. 保留所有权利. {/* &copy是版权声明图标 © */}
                     </p>
                     <div className="flex gap-4">
                         {socialLinks.map((link) => (

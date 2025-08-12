@@ -1,4 +1,5 @@
 // src/hooks/useActivityDetail.js
+// 用以获取活动id、报名人数、总人数，同时在这里定义了notification状态
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 

@@ -1,11 +1,14 @@
-// src/components/Layout.jsx
+// 通用布局容器
+
 import {Footer} from "./elements/Footer.jsx";
 import {Navbar} from "./elements/Navbar.jsx";
+import {RouteSwitchButtons} from "./elements/RouteSwitchButtons.jsx";
 import {useEffect} from "react";
+
 
 export const Layout = ({ title, children }) => {
     useEffect(() => {
-        document.title = title;
+        document.title = title; // 可以重写页面标题，覆盖html中的title
     }, [title]);
 
     return (
@@ -16,6 +19,7 @@ export const Layout = ({ title, children }) => {
                 {children}
             </main>
             <Footer />
+            <RouteSwitchButtons />
         </div>
     );
 };

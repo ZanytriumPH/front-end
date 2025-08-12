@@ -11,6 +11,7 @@ export const useActivityCard = (id, path) => {
             : '';
     };
 
+    // 点击按钮跳转相应路由
     const handleButtonClick = (e) => {
         e.preventDefault();
         navigate(`${path}/${id}`);

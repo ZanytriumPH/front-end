@@ -17,7 +17,6 @@ export const ActivityDetail = () => {
         }
 
         try {
-
             const response = await fetch(`/api/activities/${id}/register`, {
                 method: 'POST',
                 headers: {
